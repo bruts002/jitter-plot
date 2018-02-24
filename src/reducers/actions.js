@@ -7,9 +7,9 @@ const actions = {
     FOCUS_POINT: 'FOCUS_POINT'
 };
 
-export const addPlot = field => ({
+export const addPlot = metric => ({
     type: actions.ADD_PLOT,
-    data: { field }
+    data: metric
 });
 
 export const delPlot = field => ({

@@ -9,9 +9,9 @@ class JitterPlot extends Component {
     super(props);
 
     // set state
-    var { field } = this.props.jp,
-        max = d3.max(this.props.chartData, d => d[field]),
-        min = d3.min(this.props.chartData, d => d[field]),
+    var { metric } = this.props,
+        max = d3.max(this.props.chartData, d => d[metric]),
+        min = d3.min(this.props.chartData, d => d[metric]),
         radius = 10,
         margin = {
           top: 10,
@@ -37,7 +37,7 @@ class JitterPlot extends Component {
           textAlign: 'center'
         };
 
-    if (field.includes('date') || field.includes('day')) {
+    if (metric.includes('date') || metric.includes('day')) {
       yScale = d3.scaleTime()
         .range([ this.props.height - margin.top, min ]);
     }
@@ -69,12 +69,12 @@ class JitterPlot extends Component {
     const {
       selectedPoint,
       chartData,
-      jp: { field },
+      metric
     } = this.props;
 
     let spIdx = -1;
     chartData.sort( (a, b) => {
-      return a[field] - b[field];
+      return a[metric] - b[metric];
     }).some( (curr, idx) => {
       if (curr.id === selectedPoint.id) {
         spIdx = idx + 1;
@@ -93,21 +93,24 @@ class JitterPlot extends Component {
   }
 
   getHeader() {
-    const { field } = this.props.jp;
+    const {
+      metric,
+      delPlot
+    } = this.props;
     return (
       <div style={this.state.jpHeader}>
         <span className="deleteIcon">
-          <i onClick={ () => this.props.delPlot()}
+          <i onClick={ () => delPlot()}
               className="fa fa-times-circle"
               aria-hidden="true"></i>
         </span>
-        <h2>{field}</h2>
+        <h2>{metric}</h2>
       </div>
     );
   }
 
   render() {
-    const { field } = this.props.jp;
+    const { metric } = this.props;
     return (
       <div className='j-plot' style={this.state.jpStyle}>
         {this.getHeader()}
@@ -126,7 +129,7 @@ class JitterPlot extends Component {
               <Point
                 primaryColor={this.props.primaryColor}
                 key={person.id}
-                cy={this.getY(person[field])}
+                cy={this.getY(person[metric])}
                 height={this.state.max}
                 radius={this.state.radius}
                 isFocusedPoint={this.props.focusedPoint === person}

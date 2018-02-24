@@ -95,7 +95,7 @@ class JPlotController extends Component {
           </div>
           <div className='jp-holder'>
           {
-            this.props.plots.map( (jp, idx) => (
+            this.props.plots.map( (metric, idx) => (
               <JPlot
                   primaryColor={primaryColor}
                   key={idx}
@@ -103,8 +103,8 @@ class JPlotController extends Component {
                   selectedPoint={this.props.selectedPoint}
                   onPointClick={ point => this.onPointClick(point) }
                   focusedPoint={this.props.focusedPoint}
-                  jp={jp}
-                  delPlot={ () => this.props.delPlot(jp.field)}
+                  metric={metric}
+                  delPlot={ () => this.props.delPlot(metric)}
                   height={450}
                   width={300}
                   chartData={this.props.chartData} />

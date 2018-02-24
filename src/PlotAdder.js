@@ -31,12 +31,12 @@ class PlotAdder extends Component {
                 <label htmlFor='field'>Field</label>    
                 <select onChange={ e => this.handleFieldChange(e) } >
                     {
-                        this.props.validMetrics.map( (key) => (
+                        this.props.validMetrics.map( metric => (
                             <option
                                 name='field'
-                                value={key}
-                                key={key}>
-                                {key}
+                                value={metric}
+                                key={metric}>
+                                {metric}
                             </option>
                         ))
                     }

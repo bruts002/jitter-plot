@@ -9,9 +9,7 @@ const initialState = {
     'bmi',
     'age'
   ],
-  plots: [
-    { field: 'bmi' }
-  ],
+  plots: [ 'bmi' ],
   selectedPoint: chartData[0],
   focusedPoint: chartData[0],
   chartData,
@@ -25,18 +23,22 @@ export default (state=initialState, action) => {
       });
     case actions.DEL_PLOT:
       return Object.assign({}, state, {
-        plots: state.plots.filter( ({field}) => field !== action.data )
+        plots: state.plots.filter( plot => plot !== action.data )
       });
     case actions.SET_MODE:
       return Object.assign({}, state, {
         mode: action.data
       });
     case actions.SET_DATA:
+      const plots = Object
+        .keys(action.data[0])
+        .filter( key => typeof action.data[0][key] === 'number');
       return Object.assign({}, state, {
-        plots: [],
         chartData: action.data,
         selectedPoint: action.data[0],
-        focusedPoint: action.data[0]
+        focusedPoint: action.data[0],
+        validMetrics: plots,
+        plots
       });
     case actions.SELECT_POINT:
       return Object.assign({}, state, {
