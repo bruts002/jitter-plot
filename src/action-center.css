@@ -1,0 +1,60 @@
+.actionSelector {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 10px;
+    background: #262626;
+}
+
+.actionSelector ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.actionSelector ul li {
+    list-style: none;
+    margin: 0 15px;
+}
+.actionSelector ul li span {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #333;
+    border-radius: 50%;
+    font-size: 24px;
+    color: #666;
+    transition: 0.5s;
+}
+.actionSelector ul li span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffee10;
+    transition: .5s;
+    transform: scale(0.9);
+    z-index: -1;
+}
+.actionSelector ul li span.active::before,
+.actionSelector ul li span:hover::before {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ffee10;
+}
+.actionSelector ul li span.active,
+.actionSelector ul li span:hover {
+    color: #ffee10;
+    box-shadow: 0 0 5px #ffee10;
+    text-shadow: 0 0 5px #ffee10;
+    cursor: pointer;
+}

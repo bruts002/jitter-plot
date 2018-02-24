@@ -1,0 +1,19 @@
+.j-plot .deleteIcon {
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    float: right;
+    display: block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 24px;
+    text-align: center;
+    transition: 0.5s;
+}
+.j-plot .deleteIcon:hover{
+    color: rgb(255, 65, 16);
+    background: white;
+}

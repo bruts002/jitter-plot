@@ -1,0 +1,52 @@
+@import 'action-center.css';
+@import 'j-plot.css';
+@import 'plot-viewer.css';
+@import 'inputs/button.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #262626;
+  color: #A7A7A7;
+}
+
+
+.jp-ctrl {
+  width: 300px;
+  height: 700px;
+  float: right;
+  border: 1px solid gray;
+}
+
+.jp-ctrl,
+.jp-ctrl label {
+  padding: 10px;
+}
+
+.pointCard:hover {
+  cursor: pointer;
+}
+
+thead td {
+  font-weight: bold;
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  text-decoration: underline red;
+}
+
+tr.focused {
+  text-decoration: underline red;
+}
+
+.pull-right {
+  float: right;
+}
+
+.gray-stroke line,
+.gray-stroke text,
+.gray-stroke path {
+  stroke: gray;
+}
