@@ -3,6 +3,7 @@ import actions from './actions';
 const chartData = require('../people.json');
 
 const initialState = {
+  loading: false,
   mode: 'addPlot',
   validMetrics: [
     'bmi',

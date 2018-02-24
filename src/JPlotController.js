@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from './my-utils/Loading';
 import JPlot from './JPlot';
 import PointViewer from './PointViewer';
 import DataUploader from './DataUploader';
@@ -42,6 +43,9 @@ class JPlotController extends Component {
   }
 
   renderAction(){
+    if (this.props.loading) {
+      return <Loading />
+    }
     switch (this.props.mode) {
       case 'addPlot':
         return <PlotAdder
