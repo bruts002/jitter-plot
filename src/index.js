@@ -7,7 +7,12 @@ import App from './App';
 import mainReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(mainReducer);
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : undefined;
+const store = createStore(mainReducer, persistedState);
+
+store.subscribe(() => {
+    localStorage.setItem('reduxState', JSON.stringify(store.getState()));
+});
 
 ReactDOM.render(
     <Provider store={store}>
