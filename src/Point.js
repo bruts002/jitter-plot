@@ -64,14 +64,6 @@ class Point extends Component {
     if (this.props.isFocusedPoint || this.state.isHover) { return 1; }
   }
 
-  pointClick() {
-    if (this.props.isFocusedPoint) {
-      this.props.setSelectedPoint(this.props.data);
-    } else {
-      this.props.setFocusedPoint(this.props.data);
-    }
-  }
-
   render() {
     return (
       <circle
@@ -84,7 +76,7 @@ class Point extends Component {
         strokeWidth={this.getStrokeWidth()}
         onMouseEnter={ e => this.hoverMenu(true)}
         onMouseLeave={ e => this.hoverMenu(false)}
-        onClick={ e => this.pointClick() }
+        onClick={ () => this.props.onPointClick() }
         fill={this.getFill()} />
     );
   }
