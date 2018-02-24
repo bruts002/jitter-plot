@@ -6,6 +6,8 @@
     "d3": "^4.10.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
     "victory": "^0.21.2"
   },
   "devDependencies": {

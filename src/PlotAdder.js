@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Button from './inputs/Button';
 
@@ -10,13 +11,6 @@ const styles = {
 };
 
 class PlotAdder extends Component {
-    constructor(props){
-        super(props);
-        
-        this.state = {
-            selectedField: props.chartKeys[0]
-        };
-    }
 
     handleFieldChange({target: {value}}) {
         this.setState({
@@ -24,13 +18,9 @@ class PlotAdder extends Component {
         });
     }
 
-    addJPlot(event) {
+    submit(event) {
         event.preventDefault();
-        if (this.state.selectedField !== undefined) {
-            this.props.addJPlot({
-                field: this.state.selectedField
-            });
-        }
+        this.props.addPlot( this.state.selectedField );
     }
 
 
@@ -38,11 +28,11 @@ class PlotAdder extends Component {
       return (
         <div>
             <h3>Add Plot</h3>
-            <form onSubmit={ e => this.addJPlot(e) }>
+            <form onSubmit={ e => this.submit(e) }>
                 <label htmlFor='field'>Field</label>    
                 <select onChange={ e => this.handleFieldChange(e) } >
                     {
-                        this.props.chartKeys.map( (key) => (
+                        this.props.validMetrics.map( (key) => (
                             <option
                                 name='field'
                                 value={key}
@@ -57,7 +47,7 @@ class PlotAdder extends Component {
                     styles={styles.button}
                     type='submit'
                     display='Add'
-                    onClick={ e => this.addJPlot(e) } />
+                    onClick={ e => this.submit(e) } />
             </form>
         </div>
       );

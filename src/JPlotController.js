@@ -5,6 +5,12 @@ import DataUploader from './DataUploader';
 import SavedData from './SavedData';
 import PlotAdder from './PlotAdder';
 import ActionSelector from './ActionSelector';
+import { connect } from 'react-redux';
+import {
+  addPlot,
+  delPlot,
+  setMode
+} from './reducers/actions';
 
 const chartData = require('./people.json');
 const primaryColor = '#ffee10';
@@ -15,32 +21,14 @@ class JPlotController extends Component {
     super(props);
 
     this.state = {
-      action: 'addPlot',
-      jps: [{
-        name: 'BMI',
-        field: 'bmi'
-      }],
       chartData: chartData,
       selectedPoint: chartData[0],
       focusedPoint: undefined
     };
   }
 
-  setAction(action) {
-    this.setState({
-      action
-    });
-  }
-
-  addJPlot(newPlot) {
-    var newJPS = this.state.jps.slice();
-    newJPS.push(newPlot);
-    this.setState({ jps: newJPS });
-  }
-
   setChartData(newData) {
     this.setState({
-      jps: [],
       chartData: newData,
       selectedPoint: chartData[0],
       focusedPoint: undefined
@@ -67,14 +55,6 @@ class JPlotController extends Component {
     });
   }
 
-  destroyJPlot(idx) {
-    this.setState( prevState => {
-      var jps = prevState.jps;
-      jps.splice(idx,1);
-      return { jps: jps };
-    });
-  }
-
   getKey(point, idx) {
     if (typeof +point.index === 'number') {
       return +point.index;
@@ -83,18 +63,12 @@ class JPlotController extends Component {
     } else return idx;
   }
 
-  getReportableKeys(row) {
-    return Object.keys(row).filter( key => {
-      return typeof row[key] === 'number';
-    });
-  }
-
   renderAction(){
-    switch (this.state.action) {
+    switch (this.props.mode) {
       case 'addPlot':
         return <PlotAdder
-          chartKeys={ this.getReportableKeys(this.state.chartData[0]) }
-          addJPlot={ newPlot => this.addJPlot(newPlot)} />
+          validMetrics={ this.props.validMetrics }
+          addPlot={ metric => this.props.addPlot(metric) } />
       case 'viewSaved':
         return <SavedData setChartData={ newData => this.setChartData(newData)} />
       case 'upload':
@@ -105,7 +79,7 @@ class JPlotController extends Component {
           focusedPoint={this.state.focusedPoint}
           selectedPoint={this.state.selectedPoint} />
       default:
-        return <div>Unknown action</div>
+        return <div>Unknown mode</div>
     }
   }
 
@@ -134,12 +108,12 @@ class JPlotController extends Component {
             { this.renderAction() }
             <ActionSelector
               primaryColor={primaryColor}
-              action={this.state.action}
-              setAction={ action => this.setAction(action)} />
+              action={this.props.mode}
+              setAction={ action => this.props.setMode(action)} />
           </div>
           <div className='jp-holder'>
           {
-            this.state.jps.map( (jp, idx) => (
+            this.props.plots.map( (jp, idx) => (
               <JPlot
                   primaryColor={primaryColor}
                   key={idx}
@@ -149,7 +123,7 @@ class JPlotController extends Component {
                   focusedPoint={this.state.focusedPoint}
                   setFocusedPoint={ point => this.setFocusedPoint(point)}
                   jp={jp}
-                  destroyJPlot={ idx => this.destroyJPlot(idx)}
+                  delPlot={ () => this.props.delPlot(jp.field)}
                   height={450}
                   width={300}
                   chartData={this.state.chartData} />
@@ -161,4 +135,20 @@ class JPlotController extends Component {
   }
 }
 
-export default JPlotController;
+const mapStateToProps = ({
+  mode,
+  plots,
+  validMetrics
+}) => ({
+  mode,
+  plots,
+  validMetrics
+})
+
+const mapDispatchToProps = dispatch => ({
+    addPlot: metric => { dispatch(addPlot(metric)) },
+    delPlot: metric => { dispatch(delPlot(metric))},
+    setMode: mode => { dispatch(setMode(mode))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(JPlotController);

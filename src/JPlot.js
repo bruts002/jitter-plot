@@ -57,10 +57,6 @@ class JitterPlot extends Component {
     };
   }
 
-  destroyJPlot() {
-    this.props.destroyJPlot(this.props.nameId);
-  }
-
   getY(val) {
     return this.state.yScale(val);
   }
@@ -101,7 +97,7 @@ class JitterPlot extends Component {
     return (
       <div style={this.state.jpHeader}>
         <span className="deleteIcon">
-          <i onClick={ () => this.destroyJPlot()}
+          <i onClick={ () => this.props.delPlot()}
               className="fa fa-times-circle"
               aria-hidden="true"></i>
         </span>
