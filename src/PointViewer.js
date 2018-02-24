@@ -8,17 +8,7 @@ const style = {
 };
 
 const PointViewer = props => {
-  const {
-    name,
-    age,
-    bmi
-  } = props.selectedPoint;
-
-  let dname = name;
-
-  if (props.selectedPoint.first_name) {
-    dname = props.selectedPoint.first_name;
-  }
+  const keys = Object.keys(props.selectedPoint);
 
   if (props.selectedPoint === props.focusedPoint) {
     if (props.primaryColor) {
@@ -33,9 +23,11 @@ const PointViewer = props => {
     <div
       className='pointCard'
       style={style}>
-        Name: {dname} <br />
-        Age: {age} <br/>
-        BMI: {bmi} <br/>
+        { keys.map( key => {
+          return <div>
+            {key}: {props.selectedPoint[key]}
+          </div>
+        })}
     </div>
   );
 }
