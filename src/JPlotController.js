@@ -65,6 +65,17 @@ class JPlotController extends Component {
     }
   }
 
+  selectFromDropDown(id) {
+    let point;
+    this.props.chartData.some( data => {
+      if (data.id === id) {
+        point = data;
+      }
+      return point
+    })
+    this.props.selectPoint(point);
+  }
+
   render() {
     return (
         <div>
@@ -73,14 +84,14 @@ class JPlotController extends Component {
               <label htmlFor='agent'>Agent</label>
               <select
                 name="agent"
-                value={this.props.selectedPoint}
-                onChange={ e => this.props.selectPoint(this.props.chartData[e.target.value])}>
+                value={this.props.selectedPoint.id}
+                onChange={ e => this.selectFromDropDown(+e.target.value)}>
               {
                 this.props.chartData.map( (point,idx) => (
                   <option
                     key={point.id}
-                    value={idx}>
-                    {point.name || point.first_name}
+                    value={point.id}>
+                    {point.name || point.first_name || point[this.props.validMetrics[0]]}
                   </option>
                 ))
               }
