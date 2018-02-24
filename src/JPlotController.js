@@ -78,7 +78,7 @@ class JPlotController extends Component {
               {
                 this.props.chartData.map( (point,idx) => (
                   <option
-                    key={point.name || point.first_name}
+                    key={point.id}
                     value={idx}>
                     {point.name || point.first_name}
                   </option>
