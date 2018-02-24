@@ -9,50 +9,28 @@ import { connect } from 'react-redux';
 import {
   addPlot,
   delPlot,
-  setMode
+  setMode,
+  setData,
+  selectPoint,
+  focusPoint
 } from './reducers/actions';
 
-const chartData = require('./people.json');
 const primaryColor = '#ffee10';
 
 class JPlotController extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      chartData: chartData,
-      selectedPoint: chartData[0],
-      focusedPoint: undefined
-    };
-  }
-
-  setChartData(newData) {
-    this.setState({
-      chartData: newData,
-      selectedPoint: chartData[0],
-      focusedPoint: undefined
-    });
-  }
-
-  setSelectedPoint(point) {
-    if (point === this.state.selectedPoint){
+  onPointClick(point) {
+    if (point === this.props.selectedPoint){
       this.drillIntoPoint(point);
+    } else if (point === this.props.focusedPoint) {
+      this.props.selectPoint(point);
     } else {
-      this.setState({
-        selectedPoint: point
-      });
+      this.props.focusPoint(point);
     }
   }
 
   drillIntoPoint(point) {
     console.log('todo: drill into point');
-  }
-
-  setFocusedPoint(point) {
-    this.setState({
-      focusedPoint: point
-    });
   }
 
   getKey(point, idx) {
@@ -70,14 +48,14 @@ class JPlotController extends Component {
           validMetrics={ this.props.validMetrics }
           addPlot={ metric => this.props.addPlot(metric) } />
       case 'viewSaved':
-        return <SavedData setChartData={ newData => this.setChartData(newData)} />
+        return <SavedData setChartData={ newData => this.props.setData(newData)} />
       case 'upload':
-        return <DataUploader setChartData={ newData => this.setChartData(newData)} />
+        return <DataUploader setChartData={ newData => this.props.setData(newData)} />
       case 'viewDetails':
         return <PointViewer
           primaryColor={primaryColor}
-          focusedPoint={this.state.focusedPoint}
-          selectedPoint={this.state.selectedPoint} />
+          focusedPoint={this.props.focusedPoint}
+          selectedPoint={this.props.selectedPoint} />
       default:
         return <div>Unknown mode</div>
     }
@@ -91,10 +69,10 @@ class JPlotController extends Component {
               <label htmlFor='agent'>Agent</label>
               <select
                 name="agent"
-                value={this.state.selectedPoint}
-                onChange={ e => this.setSelectedPoint(this.state.chartData[e.target.value])}>
+                value={this.props.selectedPoint}
+                onChange={ e => this.props.selectPoint(this.props.chartData[e.target.value])}>
               {
-                this.state.chartData.map( (point,idx) => (
+                this.props.chartData.map( (point,idx) => (
                   <option
                     key={point.name || point.first_name}
                     value={idx}>
@@ -118,15 +96,14 @@ class JPlotController extends Component {
                   primaryColor={primaryColor}
                   key={idx}
                   nameId={idx}
-                  selectedPoint={this.state.selectedPoint}
-                  setSelectedPoint={ point => this.setSelectedPoint(point) }
-                  focusedPoint={this.state.focusedPoint}
-                  setFocusedPoint={ point => this.setFocusedPoint(point)}
+                  selectedPoint={this.props.selectedPoint}
+                  onPointClick={ point => this.onPointClick(point) }
+                  focusedPoint={this.props.focusedPoint}
                   jp={jp}
                   delPlot={ () => this.props.delPlot(jp.field)}
                   height={450}
                   width={300}
-                  chartData={this.state.chartData} />
+                  chartData={this.props.chartData} />
             ))
           }
           </div>
@@ -138,17 +115,26 @@ class JPlotController extends Component {
 const mapStateToProps = ({
   mode,
   plots,
-  validMetrics
+  validMetrics,
+  chartData,
+  selectedPoint,
+  focusedPoint,
 }) => ({
   mode,
   plots,
-  validMetrics
+  validMetrics,
+  chartData,
+  selectedPoint,
+  focusedPoint,
 })
 
 const mapDispatchToProps = dispatch => ({
-    addPlot: metric => { dispatch(addPlot(metric)) },
-    delPlot: metric => { dispatch(delPlot(metric))},
-    setMode: mode => { dispatch(setMode(mode))}
+  addPlot: metric => { dispatch(addPlot(metric)) },
+  delPlot: metric => { dispatch(delPlot(metric))},
+  setMode: mode => { dispatch(setMode(mode))},
+  setData: data => { dispatch(setData(data))},
+  selectPoint: point => { dispatch(selectPoint(point))},
+  focusPoint: point => { dispatch(focusPoint(point))},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JPlotController);

@@ -130,9 +130,8 @@ class JitterPlot extends Component {
                 height={this.state.max}
                 radius={this.state.radius}
                 isFocusedPoint={this.props.focusedPoint === person}
-                setFocusedPoint={this.props.setFocusedPoint}
                 isSelectedPoint={this.isSelectedPoint(person)}
-                setSelectedPoint={this.props.setSelectedPoint}
+                onPointClick={ () => this.props.onPointClick(person) }
                 data={person} />
             ))
           }
