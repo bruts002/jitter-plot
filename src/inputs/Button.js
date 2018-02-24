@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Button = props => {
     const {
@@ -7,16 +7,17 @@ const Button = props => {
       display
     } = props;
     return (
-      <div onClick={onClick}
-            onKeyUp={ e => {
-              if (e.keyCode === 13 || e.keyCode === 32) {
-                onClick(e);
-              }
-            }}
-            tabIndex="0"
-            style={styles}
-            className='button'>
-          <span>{display}</span>
+      <div
+        onClick={onClick}
+        onKeyUp={ e => {
+          if (e.keyCode === 13 || e.keyCode === 32) {
+            onClick(e);
+          }
+        }}
+        tabIndex="0"
+        style={styles}
+        className='button'>
+        <span>{display}</span>
       </div>
     );
 };
