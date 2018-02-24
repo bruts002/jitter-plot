@@ -20,9 +20,9 @@ const primaryColor = '#ffee10';
 class JPlotController extends Component {
 
   onPointClick(point) {
-    if (point === this.props.selectedPoint){
+    if (point.id === this.props.selectedPoint.id){
       this.drillIntoPoint(point);
-    } else if (point === this.props.focusedPoint) {
+    } else if (point.id === this.props.focusedPoint.id) {
       this.props.selectPoint(point);
     } else {
       this.props.focusPoint(point);

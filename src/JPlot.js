@@ -62,7 +62,7 @@ class JitterPlot extends Component {
   }
 
   isSelectedPoint(point) {
-    return this.props.selectedPoint === point;
+    return this.props.selectedPoint.id === point.id;
   }
 
   getFooter() {
@@ -76,7 +76,7 @@ class JitterPlot extends Component {
     chartData.sort( (a, b) => {
       return a[field] - b[field];
     }).some( (curr, idx) => {
-      if (curr === selectedPoint) {
+      if (curr.id === selectedPoint.id) {
         spIdx = idx + 1;
       }
       return spIdx !== -1;
