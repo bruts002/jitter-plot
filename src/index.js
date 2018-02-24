@@ -1,18 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import './index.css';
 import App from './App';
 import mainReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : undefined;
-const store = createStore(mainReducer, persistedState);
+const localStorageMiddleWare = ({getState}) => {
+    return next => action => {
+        const result = next(action);
+        localStorage.setItem('reduxState', JSON.stringify(getState()))
+        return result;
+    };
+};
 
-store.subscribe(() => {
-    localStorage.setItem('reduxState', JSON.stringify(store.getState()));
-});
+const reHydrateStore = () => {
+    if (localStorage.getItem('reduxState') !== null) {
+        return JSON.parse(localStorage.getItem('reduxState'));
+    } 
+};
+
+const store = createStore(
+    mainReducer,
+    reHydrateStore(),
+    applyMiddleware(localStorageMiddleWare)
+);
 
 ReactDOM.render(
     <Provider store={store}>
