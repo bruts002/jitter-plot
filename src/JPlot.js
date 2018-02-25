@@ -53,12 +53,12 @@ class JitterPlot extends Component {
     }
 
     this.state = {
-        max: max,
-        min: min,
-        yScale: yScale,
-        yAxis: yAxis,
-        xScale: xScale,
-        xAxis: xAxis,
+      max,
+      min,
+      yScale,
+      yAxis,
+      xScale,
+      xAxis,
     };
   }
 
@@ -135,7 +135,6 @@ class JitterPlot extends Component {
                 primaryColor={config.primaryColor}
                 key={person.id}
                 cy={this.getY(Math.round(person[metric]))}
-                height={this.state.max}
                 radius={config.radius}
                 isFocusedPoint={this.props.focusedPoint === person}
                 isSelectedPoint={this.isSelectedPoint(person)}
