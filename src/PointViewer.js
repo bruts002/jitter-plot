@@ -4,26 +4,16 @@ const style = {
   border: '2px solid gray',
   borderRadius: '5px',
   padding: '5px',
-  margin: '5px'
+  margin: '5px',
+  borderColor: 'gray'
 };
 
 const PointViewer = props => {
   const keys = Object.keys(props.selectedPoint);
-  const pointStyle = Object.assign({}, style);
-
-  if (props.selectedPoint === props.focusedPoint) {
-    if (props.primaryColor) {
-      pointStyle.borderColor = props.primaryColor;
-    } else {
-      pointStyle.borderColor = '#db4437';
-    }
-  } else {
-    pointStyle.borderColor = 'gray';
-  }
   return (
     <div
       className='pointCard'
-      style={pointStyle}>
+      style={style}>
         { keys.map( key => {
           return <div key={key}>
             {key}: {props.selectedPoint[key]}

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-/**
- * TODO: have the primary color by dynamic (or default if none) using this.props.primaryColor
- */
 class ActionSelector extends Component {
     isActive(action) {
         return (this.props.action === action ? 'active' : '');

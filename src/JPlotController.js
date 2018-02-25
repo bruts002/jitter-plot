@@ -16,8 +16,6 @@ import {
   focusPoint
 } from './reducers/actions';
 
-const primaryColor = '#ffee10';
-
 class JPlotController extends Component {
 
   onPointClick(point) {
@@ -57,7 +55,6 @@ class JPlotController extends Component {
         return <DataUploader setChartData={ newData => this.props.setData(newData)} />
       case 'viewDetails':
         return <PointViewer
-          primaryColor={primaryColor}
           focusedPoint={this.props.focusedPoint}
           selectedPoint={this.props.selectedPoint} />
       default:
@@ -100,7 +97,6 @@ class JPlotController extends Component {
             <hr />
             { this.renderAction() }
             <ActionSelector
-              primaryColor={primaryColor}
               action={this.props.mode}
               setAction={ action => this.props.setMode(action)} />
           </div>
@@ -108,7 +104,6 @@ class JPlotController extends Component {
           {
             this.props.plots.map( (metric, idx) => (
               <JPlot
-                  primaryColor={primaryColor}
                   key={idx}
                   nameId={idx}
                   selectedPoint={this.props.selectedPoint}

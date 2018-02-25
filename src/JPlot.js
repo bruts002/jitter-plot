@@ -17,7 +17,8 @@ const config = {
   jpHeader: {
     padding: '10px',
     textAlign: 'center'
-  }
+  },
+  primaryColor: '#ffee10'
 };
 
 class JitterPlot extends Component {
@@ -129,7 +130,7 @@ class JitterPlot extends Component {
           {
             this.props.chartData.map( person => (
               <Point
-                primaryColor={this.props.primaryColor}
+                primaryColor={config.primaryColor}
                 key={person.id}
                 cy={this.getY(Math.round(person[metric]))}
                 height={this.state.max}
