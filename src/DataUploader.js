@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import saveData from './my-utils/saveData';
+
 function isJSONFile(fileName) {
     return (fileName &&
         fileName !== '' &&
@@ -31,25 +33,7 @@ class DataUploader extends Component {
           // TODO: handle bad data type
       } else {
         // save to localstorage
-        var savedDataNames = window.localStorage.getItem('savedDataNames');
-        if (savedDataNames !== null) {
-            savedDataNames = JSON.parse(savedDataNames);
-            if (this.state.fileName in savedDataNames) {
-                // TODO alert overriding prev entry
-            }
-        } else {
-            savedDataNames = {};
-
-        }
-        savedDataNames[this.state.fileName] = true;
-        window.localStorage.setItem(
-            'savedDataNames',
-            JSON.stringify(savedDataNames)
-        );
-        window.localStorage.setItem(
-            this.state.fileName,
-            JSON.stringify(data)
-        );
+        saveData(this.state.fileName, data);
         this.props.setChartData(data);
       }
   }

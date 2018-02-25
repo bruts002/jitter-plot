@@ -15,12 +15,11 @@ class SavedData extends Component {
         return should;
     }
     getSavedDataNames() {
-        var savedDataNames = JSON.parse(window.localStorage.getItem('savedDataNames')),
-            savedDataNamesArray = [];
-        for (var key in savedDataNames) {
-            savedDataNamesArray.push(key);
-        }
-        return savedDataNamesArray;
+        return Object.keys(
+            JSON.parse(
+                window.localStorage.getItem('savedDataSets')
+            )
+        );
     }
 
     setData(entry) {

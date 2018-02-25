@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './my-utils/Loading';
+import saveData from './my-utils/saveData';
 import JPlot from './JPlot';
 import PointViewer from './PointViewer';
 import DataUploader from './DataUploader';
@@ -17,6 +18,25 @@ import {
 } from './reducers/actions';
 
 class JPlotController extends Component {
+
+  constructor() {
+    super();
+
+    fetch('./MOCK_DATA_2.json')
+      .then( data => data.json())
+      .then( resp => {
+        debugger;
+        console.log(resp);
+        saveData('Random People 2', resp);
+      });
+    fetch('./MOCK_DATA_1.json')
+      .then( data => data.json())
+      .then( resp => {
+        debugger;
+        console.log(resp);
+        saveData('Random People', resp);
+      });
+  }
 
   onPointClick(point) {
     if (point.id === this.props.selectedPoint.id){
