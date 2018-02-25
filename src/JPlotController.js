@@ -19,15 +19,17 @@ import {
 
 class JPlotController extends Component {
 
-  constructor() {
-    super();
-
+  componentDidMount() {
+    const _this = this;
     fetch('./MOCK_DATA_2.json')
       .then( data => data.json())
       .then( resp => saveData('Random People 2', resp));
     fetch('./MOCK_DATA_1.json')
       .then( data => data.json())
-      .then( resp => saveData('Random People', resp));
+      .then( resp => {
+        saveData('Random People', resp);
+        _this.props.setData(resp);
+      });
   }
 
   onPointClick(point) {
