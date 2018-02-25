@@ -11,6 +11,12 @@ const styles = {
 
 class PlotAdder extends Component {
 
+    constructor() {
+        super();
+
+        this.state = {};
+    }
+
     handleFieldChange({target: {value}}) {
         this.setState({
             selectedField: value
@@ -19,7 +25,10 @@ class PlotAdder extends Component {
 
     submit(event) {
         event.preventDefault();
-        this.props.addPlot( this.state.selectedField );
+        this.props.addPlot( this.state.selectedField ?
+            this.state.selectedField :
+            this.props.validMetrics[0]
+        );
     }
 
 
