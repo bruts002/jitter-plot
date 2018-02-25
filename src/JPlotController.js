@@ -104,16 +104,13 @@ class JPlotController extends Component {
           {
             this.props.plots.map( (metric, idx) => (
               <JPlot
-                  key={idx}
-                  nameId={idx}
-                  selectedPoint={this.props.selectedPoint}
-                  onPointClick={ point => this.onPointClick(point) }
-                  focusedPoint={this.props.focusedPoint}
-                  metric={metric}
-                  delPlot={ () => this.props.delPlot(metric)}
-                  height={450}
-                  width={300}
-                  chartData={this.props.chartData} />
+                key={idx}
+                selectedPoint={this.props.selectedPoint}
+                onPointClick={ point => this.onPointClick(point) }
+                focusedPoint={this.props.focusedPoint}
+                metric={metric}
+                delPlot={ () => this.props.delPlot(metric)}
+                chartData={this.props.chartData} />
             ))
           }
           </div>

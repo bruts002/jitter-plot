@@ -18,7 +18,9 @@ const config = {
     padding: '10px',
     textAlign: 'center'
   },
-  primaryColor: '#ffee10'
+  primaryColor: '#ffee10',
+  height: 450,
+  width: 300,
 };
 
 class JitterPlot extends Component {
@@ -33,21 +35,21 @@ class JitterPlot extends Component {
     let yScale = d3
       .scaleLinear()
       .domain([ min, max ])
-      .range([ this.props.height - config.margin.top, min ]);
+      .range([ config.height - config.margin.top, min ]);
     const yAxis = d3
       .axisRight(yScale)
       .tickValues([ min, max ]);
     const xScale = d3
       .scaleLinear()
-      .domain([ 0, this.props.width ])
-      .range([ 0, this.props.width - config.margin.side ]);
+      .domain([ 0, config.width ])
+      .range([ 0, config.width - config.margin.side ]);
     const xAxis = d3
       .axisTop(xScale)
-      .tickValues([ this.props.width ]);
+      .tickValues([ config.width ]);
 
     if (metric.includes('date') || metric.includes('day')) {
       yScale = d3.scaleTime()
-        .range([ this.props.height - config.margin.top, min ]);
+        .range([ config.height - config.margin.top, min ]);
     }
 
     this.state = {
@@ -119,12 +121,12 @@ class JitterPlot extends Component {
         {this.getHeader()}
         <hr/>
         <svg
-          width={this.props.width}
-          height={this.props.height}
+          width={config.width}
+          height={config.height}
           style={config.svgStyle}>
           <g>
             <Axis
-              height={this.props.height-config.margin.top}
+              height={config.height-config.margin.top}
               axis={this.state.yAxis}
               axisType='y' />
           {
