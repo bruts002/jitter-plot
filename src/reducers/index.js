@@ -4,15 +4,15 @@ const chartData = require('../people.json');
 
 const initialState = {
   loading: false,
-  mode: 'addPlot',
+  mode: 'viewDetails',
   validMetrics: [
     'bmi',
     'age'
   ],
   plots: [ 'bmi' ],
-  selectedPoint: chartData[0],
-  focusedPoint: chartData[0],
-  chartData,
+  selectedPoint: {},
+  focusedPoint:  {},
+  chartData: []
 };
 
 export default (state=initialState, action) => {

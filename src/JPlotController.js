@@ -28,7 +28,9 @@ class JPlotController extends Component {
       .then( data => data.json())
       .then( resp => {
         saveData('Random People', resp);
-        _this.props.setData(resp);
+        if (_this.props.chartData.length === 0) {
+          _this.props.setData(resp);
+        }
       });
   }
 
