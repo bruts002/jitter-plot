@@ -12,7 +12,6 @@ class Axis extends Component {
   renderAxis() {
     var node = ReactDOM.findDOMNode(this);
     d3Select(node)
-      .attr('class', 'gray-stroke')
       .call(this.props.axis);
   }
   render() {
@@ -24,7 +23,7 @@ class Axis extends Component {
     }
     return (
       <g
-        className='axis'
+        className='axis gray-stroke'
         stroke='grey'
         transform={translate}>
       </g>
