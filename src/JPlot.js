@@ -39,13 +39,6 @@ class JitterPlot extends Component {
     const yAxis = d3
       .axisRight(yScale)
       .tickValues([ min, max ]);
-    const xScale = d3
-      .scaleLinear()
-      .domain([ 0, config.width ])
-      .range([ 0, config.width - config.margin.side ]);
-    const xAxis = d3
-      .axisTop(xScale)
-      .tickValues([ config.width ]);
 
     if (metric.includes('date') || metric.includes('day')) {
       yScale = d3.scaleTime()
@@ -53,12 +46,8 @@ class JitterPlot extends Component {
     }
 
     this.state = {
-      max,
-      min,
       yScale,
       yAxis,
-      xScale,
-      xAxis,
     };
   }
 
@@ -127,8 +116,7 @@ class JitterPlot extends Component {
           <g>
             <Axis
               height={config.height-config.margin.top}
-              axis={this.state.yAxis}
-              axisType='y' />
+              axis={this.state.yAxis} />
           {
             this.props.chartData.map( person => (
               <Point

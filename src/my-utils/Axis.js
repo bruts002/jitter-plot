@@ -15,17 +15,11 @@ class Axis extends Component {
       .call(this.props.axis);
   }
   render() {
-    var translate;
-    if (this.props.axisType === 'x') {
-      translate = `translate(0,${this.props.height})`;
-    } else if (this.props.axisType === 'y') {
-      translate = `translate(0, 0)`;
-    }
     return (
       <g
         className='axis gray-stroke'
         stroke='grey'
-        transform={translate}>
+        transform={'translate(0, 0)'}>
       </g>
     );
   }
