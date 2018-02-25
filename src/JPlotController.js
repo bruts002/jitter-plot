@@ -24,18 +24,10 @@ class JPlotController extends Component {
 
     fetch('./MOCK_DATA_2.json')
       .then( data => data.json())
-      .then( resp => {
-        debugger;
-        console.log(resp);
-        saveData('Random People 2', resp);
-      });
+      .then( resp => saveData('Random People 2', resp));
     fetch('./MOCK_DATA_1.json')
       .then( data => data.json())
-      .then( resp => {
-        debugger;
-        console.log(resp);
-        saveData('Random People', resp);
-      });
+      .then( resp => saveData('Random People', resp));
   }
 
   onPointClick(point) {
