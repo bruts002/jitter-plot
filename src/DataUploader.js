@@ -7,14 +7,14 @@ function isJSONFile(fileName) {
         fileName.slice(-5) === '.json');
 }
 
-function isItActuallyJSON(contents) {
-    var valid = false;
+function parseData(contents) {
+    var data = false;
     try {
-        valid = JSON.parse(contents);
+        data = JSON.parse(contents);
     } catch (e) {
-        valid = false;
+        data = false;
     }
-    return valid;
+    return data;
 }
 
 class DataUploader extends Component {
@@ -26,8 +26,8 @@ class DataUploader extends Component {
   }
 
   fileHandler(evt) {
-      var valid = isItActuallyJSON(evt.target.result);
-      if (valid === false) {
+      var data = parseData(evt.target.result);
+      if (data === false) {
           // TODO: handle bad data type
       } else {
         // save to localstorage
@@ -48,9 +48,9 @@ class DataUploader extends Component {
         );
         window.localStorage.setItem(
             this.state.fileName,
-            JSON.stringify(valid)
+            JSON.stringify(data)
         );
-        this.props.setChartData(valid);
+        this.props.setChartData(data);
       }
   }
 
