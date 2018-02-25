@@ -3,57 +3,59 @@ import Axis from './my-utils/Axis';
 import Point from './Point';
 import * as d3 from 'd3';
 
+const config = {
+  radius: 10,
+  margin: {
+    top: 10,
+    side: 10
+  },
+  svgStyle: { padding: '10px' },
+  jpStyle: {
+    float: 'right',
+    border: '1px solid gray'
+  },
+  jpHeader: {
+    padding: '10px',
+    textAlign: 'center'
+  }
+};
+
 class JitterPlot extends Component {
 
   constructor(props) {
     super(props);
 
     // set state
-    var { metric } = this.props,
-        max = d3.max(this.props.chartData, d => d[metric]),
-        min = d3.min(this.props.chartData, d => d[metric]),
-        radius = 10,
-        margin = {
-          top: 10,
-          side: 10
-        },
-        svgStyle = { padding: '10px' },
-        yScale = d3.scaleLinear()
-          .domain([ min, max ])
-          .range([ this.props.height - margin.top, min ]),
-        yAxis = d3.axisRight(yScale)
-          .tickValues([ min, max ]),
-        xScale = d3.scaleLinear()
-          .domain([ 0, this.props.width ])
-          .range([ 0, this.props.width - margin.side ]),
-        xAxis = d3.axisTop(xScale)
-          .tickValues([ this.props.width ]),
-        jpStyle = {
-          float: 'right',
-          border: '1px solid gray'
-        },
-        jpHeader = {
-          padding: '10px',
-          textAlign: 'center'
-        };
+    const { metric } = this.props;
+    const max = d3.max(this.props.chartData, d => Math.round(d[metric]));
+    const min = d3.min(this.props.chartData, d => Math.round(d[metric]));
+    let yScale = d3
+      .scaleLinear()
+      .domain([ min, max ])
+      .range([ this.props.height - config.margin.top, min ]);
+    const yAxis = d3
+      .axisRight(yScale)
+      .tickValues([ min, max ]);
+    const xScale = d3
+      .scaleLinear()
+      .domain([ 0, this.props.width ])
+      .range([ 0, this.props.width - config.margin.side ]);
+    const xAxis = d3
+      .axisTop(xScale)
+      .tickValues([ this.props.width ]);
 
     if (metric.includes('date') || metric.includes('day')) {
       yScale = d3.scaleTime()
-        .range([ this.props.height - margin.top, min ]);
+        .range([ this.props.height - config.margin.top, min ]);
     }
 
     this.state = {
-        margin: margin,
-        svgStyle: svgStyle,
         max: max,
         min: min,
         yScale: yScale,
         yAxis: yAxis,
         xScale: xScale,
         xAxis: xAxis,
-        jpStyle: jpStyle,
-        jpHeader: jpHeader,
-        radius: radius
     };
   }
 
@@ -74,7 +76,7 @@ class JitterPlot extends Component {
 
     let spIdx = -1;
     chartData.sort( (a, b) => {
-      return a[metric] - b[metric];
+      return Math.round(a[metric]) - Math.round(b[metric]);
     }).some( (curr, idx) => {
       if (curr.id === selectedPoint.id) {
         spIdx = idx + 1;
@@ -85,7 +87,7 @@ class JitterPlot extends Component {
     const percentile = 'Percentile: ' + Math.round(spIdx / chartData.length * 100) + '%';
 
     return (
-      <div style={this.state.jpHeader}>
+      <div style={config.jpHeader}>
         <h3>{position}</h3>
         <h4>{percentile}</h4>
       </div>
@@ -98,7 +100,7 @@ class JitterPlot extends Component {
       delPlot
     } = this.props;
     return (
-      <div style={this.state.jpHeader}>
+      <div style={config.jpHeader}>
         <span className="deleteIcon">
           <i onClick={ () => delPlot()}
               className="fa fa-times-circle"
@@ -112,16 +114,16 @@ class JitterPlot extends Component {
   render() {
     const { metric } = this.props;
     return (
-      <div className='j-plot' style={this.state.jpStyle}>
+      <div className='j-plot' style={config.jpStyle}>
         {this.getHeader()}
         <hr/>
         <svg
           width={this.props.width}
           height={this.props.height}
-          style={this.state.svgStyle}>
+          style={config.svgStyle}>
           <g>
             <Axis
-              height={this.props.height-this.state.margin.top}
+              height={this.props.height-config.margin.top}
               axis={this.state.yAxis}
               axisType='y' />
           {
@@ -129,9 +131,9 @@ class JitterPlot extends Component {
               <Point
                 primaryColor={this.props.primaryColor}
                 key={person.id}
-                cy={this.getY(person[metric])}
+                cy={this.getY(Math.round(person[metric]))}
                 height={this.state.max}
-                radius={this.state.radius}
+                radius={config.radius}
                 isFocusedPoint={this.props.focusedPoint === person}
                 isSelectedPoint={this.isSelectedPoint(person)}
                 onPointClick={ () => this.props.onPointClick(person) }
