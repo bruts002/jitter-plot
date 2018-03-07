@@ -27,7 +27,7 @@ export default (state=initialState, action) => {
     case actions.SET_DATA:
       const plots = Object
         .keys(action.data[0])
-        .filter( key => typeof action.data[0][key] === 'number');
+        .filter( key => !isNaN(+action.data[0][key]));
       return Object.assign({}, state, {
         chartData: action.data,
         selectedPoint: action.data[0],
