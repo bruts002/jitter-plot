@@ -93,10 +93,12 @@ class JitterPlot extends Component {
     } = this.props;
     return (
       <div style={config.jpHeader}>
-        <span className="deleteIcon">
-          <i onClick={ () => delPlot()}
-              className="fa fa-times-circle"
-              aria-hidden="true"></i>
+        <span
+          className="deleteIcon"
+          onClick={ delPlot }>
+          <i
+            className="fa fa-times-circle"
+            aria-hidden="true"></i>
         </span>
         <h2>{metric}</h2>
       </div>
