@@ -120,7 +120,7 @@ class JPlotController extends Component {
           {
             this.props.plots.map( (metric, idx) => (
               <JPlot
-                key={idx}
+                key={idx+metric}
                 selectedPoint={this.props.selectedPoint}
                 onPointClick={ point => this.onPointClick(point) }
                 focusedPoint={this.props.focusedPoint}
