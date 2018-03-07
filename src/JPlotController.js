@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './my-utils/Loading';
-import saveData from './my-utils/saveData';
+import dataSetAPI from './my-utils/dataSetAPI';
 import JPlot from './JPlot';
 import PointViewer from './PointViewer';
 import DataUploader from './DataUploader';
@@ -21,6 +21,7 @@ class JPlotController extends Component {
 
   componentDidMount() {
     const _this = this;
+    const { saveData } = dataSetAPI;
     fetch('./MOCK_DATA_2.json')
       .then( data => data.json())
       .then( resp => saveData('Random People 2', resp));

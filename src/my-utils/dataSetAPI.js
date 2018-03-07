@@ -1,4 +1,4 @@
-export default (name, data) => {
+const saveData = (name, data) => {
     let savedDataSets = window.localStorage.getItem('savedDataSets');
     if (savedDataSets !== null) {
         savedDataSets = JSON.parse(savedDataSets);
@@ -17,4 +17,8 @@ export default (name, data) => {
         name,
         JSON.stringify(data)
     );
+};
+
+export default {
+    saveData,
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import saveData from './my-utils/saveData';
+import dataSetAPI from './my-utils/dataSetAPI';
 
 function isJSONFile(fileName) {
     return (fileName &&
@@ -33,7 +33,7 @@ class DataUploader extends Component {
           // TODO: handle bad data type
       } else {
         // save to localstorage
-        saveData(this.state.fileName, data);
+        dataSetAPI.saveData(this.state.fileName, data);
         this.props.setChartData(data);
       }
   }
