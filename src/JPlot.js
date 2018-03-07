@@ -35,7 +35,7 @@ class JitterPlot extends Component {
     let yScale = d3
       .scaleLinear()
       .domain([ min, max ])
-      .range([ config.height - config.margin.top, min ]);
+      .range([ config.height - config.margin.top, 0 ]);
     const yAxis = d3
       .axisRight(yScale)
       .tickValues([ min, max ]);
