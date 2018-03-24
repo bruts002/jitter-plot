@@ -3,8 +3,8 @@ import Loading from './my-utils/Loading';
 import dataSetAPI from './my-utils/dataSetAPI';
 import JPlot from './JPlot';
 import PointViewer from './PointViewer';
-import DataUploader from './DataUploader';
 import SavedData from './SavedData';
+import FilterData from './FilterData';
 import PlotAdder from './PlotAdder';
 import ActionSelector from './ActionSelector';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ import {
   delPlot,
   setMode,
   setData,
+  deleteDataSet,
   selectPoint,
   focusPoint
 } from './reducers/actions';
@@ -62,15 +63,17 @@ class JPlotController extends Component {
       return <Loading />
     }
     switch (this.props.mode) {
-      case 'addPlot':
+      case ActionSelector.ADD_PLOT:
         return <PlotAdder
           validMetrics={ this.props.validMetrics }
           addPlot={ metric => this.props.addPlot(metric) } />
-      case 'viewSaved':
-        return <SavedData setChartData={ newData => this.props.setData(newData)} />
-      case 'upload':
-        return <DataUploader setChartData={ newData => this.props.setData(newData)} />
-      case 'viewDetails':
+      case ActionSelector.VIEW_SAVED:
+        return <SavedData
+          deleteDataSet={ dataSet => this.props.deleteDataSet(dataSet) }
+          setChartData={ newData => this.props.setData(newData)} />
+      case ActionSelector.FILTER_DATA:
+        return <FilterData />
+      case ActionSelector.VIEW_DETAILS:
         return <PointViewer
           focusedPoint={this.props.focusedPoint}
           selectedPoint={this.props.selectedPoint} />
@@ -157,6 +160,7 @@ const mapDispatchToProps = dispatch => ({
   delPlot: metric => { dispatch(delPlot(metric))},
   setMode: mode => { dispatch(setMode(mode))},
   setData: data => { dispatch(setData(data))},
+  deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},
   selectPoint: point => { dispatch(selectPoint(point))},
   focusPoint: point => { dispatch(focusPoint(point))},
 })

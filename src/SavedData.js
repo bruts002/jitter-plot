@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DataUploader from './DataUploader';
 
 class SavedData extends Component {
     constructor(props){
@@ -38,11 +39,23 @@ class SavedData extends Component {
             <h3>Saved Data</h3>
             <ul>
             {this.state.savedDataNamesArray.map( savedData => (
-                <li
-                    onClick={ () => this.setData(savedData) }
-                    key={savedData}>{savedData}</li>
+                <li key={savedData}>
+                    <span
+                        className="saved-data-set"
+                        onClick={ () => this.setData(savedData) } >
+                        {savedData}
+                    </span>
+                    <span
+                        className="deleteIcon"
+                        onClick={ () => this.props.deleteDataSet(savedData) }>
+                        <i
+                            className="fa fa-times-circle"
+                            aria-hidden="true"></i>
+                    </span>
+                </li>
             ))}
             </ul>
+            <DataUploader setChartData={ newData => this.props.setChartData(newData)} />
         </div>
       );
     }

@@ -56,7 +56,7 @@ class DataUploader extends Component {
   render() {
     return (
       <div>
-          <h3>Data Uploader</h3>
+          <h3>Upload Data</h3>
           <input
             type="file"
             onChange={this.onChange}
