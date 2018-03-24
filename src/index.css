@@ -50,3 +50,7 @@ tr.focused {
 .gray-stroke path {
   stroke: gray;
 }
+
+.saved-data-set {
+  cursor: pointer;
+}

@@ -19,6 +19,11 @@ const saveData = (name, data) => {
     );
 };
 
+const deleteDataSet = dataSet => {
+    // TODO!
+};
+
 export default {
     saveData,
+    deleteDataSet
 };

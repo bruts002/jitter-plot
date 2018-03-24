@@ -24,6 +24,8 @@ export default (state=initialState, action) => {
       return Object.assign({}, state, {
         mode: action.data
       });
+    case actions.DEL_DATA_SET:
+      return state;
     case actions.SET_DATA:
       const plots = Object
         .keys(action.data[0])
