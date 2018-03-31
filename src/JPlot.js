@@ -79,16 +79,21 @@ class JitterPlot extends Component {
     const percentile = 'Percentile: ' + Math.round(spIdx / chartData.length * 100) + '%';
 
     return (
-      <div style={config.jpHeader}>
-        <h3>{position}</h3>
-        <h4>{percentile}</h4>
-      </div>
+      chartData.length ?
+        <div style={config.jpHeader}>
+          <h3>{position}</h3>
+          <h4>{percentile}</h4>
+        </div> :
+        <div style={config.jpHeader}>
+          <h3>&nbsp;</h3>
+        </div>
     );
   }
 
   getHeader() {
     const {
       metric,
+      chartData,
       delPlot
     } = this.props;
     return (
@@ -100,40 +105,50 @@ class JitterPlot extends Component {
             className="fa fa-times-circle"
             aria-hidden="true"></i>
         </span>
-        <h2>{metric}</h2>
+        <h2>{chartData.length ? metric : 'No Data'}</h2>
       </div>
     );
   }
 
   render() {
-    const { metric } = this.props;
+    const {
+      metric,
+      chartData
+     } = this.props;
     return (
       <div className='j-plot' style={config.jpStyle}>
         {this.getHeader()}
         <hr/>
-        <svg
-          width={config.width}
-          height={config.height}
-          style={config.svgStyle}>
-          <g>
-            <Axis
-              height={config.height-config.margin.top}
-              axis={this.state.yAxis} />
-          {
-            this.props.chartData.map( person => (
-              <Point
-                primaryColor={config.primaryColor}
-                key={person.id}
-                cy={this.getY(Math.round(person[metric]))}
-                radius={config.radius}
-                isFocusedPoint={this.props.focusedPoint === person}
-                isSelectedPoint={this.isSelectedPoint(person)}
-                onPointClick={ () => this.props.onPointClick(person) }
-                data={person} />
-            ))
-          }
-          </g>
-        </svg>
+        {chartData.length ?
+          <svg
+            width={config.width}
+            height={config.height}
+            style={config.svgStyle}>
+            <g>
+              <Axis
+                height={config.height-config.margin.top}
+                axis={this.state.yAxis} />
+            {
+              this.props.chartData.map( person => (
+                <Point
+                  primaryColor={config.primaryColor}
+                  key={person.id}
+                  cy={this.getY(Math.round(person[metric]))}
+                  radius={config.radius}
+                  isFocusedPoint={this.props.focusedPoint === person}
+                  isSelectedPoint={this.isSelectedPoint(person)}
+                  onPointClick={ () => this.props.onPointClick(person) }
+                  data={person} />
+              ))
+            }
+            </g>
+          </svg> :
+          <div
+            style={{
+              width: config.width,
+              height: config.height
+            }}
+          />}
         <hr />
         {this.getFooter()}
       </div>

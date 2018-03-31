@@ -22,4 +22,4 @@ storiesOf('Button', module)
   ));
 
 storiesOf('JPlot', module)
-  .add('renders', () => <JPlot />);
+  .add('no data', () => <JPlot />);
