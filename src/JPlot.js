@@ -141,4 +141,10 @@ class JitterPlot extends Component {
   }
 }
 
+JitterPlot.defaultProps = {
+  chartData: [],
+  metric: '',
+  selectedPoint: {}
+};
+
 export default JitterPlot;
