@@ -22,4 +22,17 @@ storiesOf('Button', module)
   ));
 
 storiesOf('JPlot', module)
-  .add('no data', () => <JPlot />);
+  .add('no data', () => <JPlot />)
+  .add('with data', () => <JPlot
+    selectedPoint={{age: 0, id: 0}}
+    onPointClick={ action('Point clicked ') }
+    focusedPoint={{age: 0, id: 0}}
+    metric={'age'}
+    delPlot={ action('Plot delete clicked') }
+    chartData={[
+      { age: 0, id: 0 },
+      { age: 1, id: 1 },
+      { age: 2, id: 2 },
+      { age: 3, id: 3 },
+    ]} />
+  );
