@@ -72,7 +72,10 @@ class App extends Component {
           deleteDataSet={ dataSet => this.props.deleteDataSet(dataSet) }
           setChartData={ newData => this.props.setData(newData)} />
       case ActionSelector.FILTER_DATA:
-        return <FilterData />
+        return <FilterData
+          chartData={ this.props.chartData }
+          validMetrics={ this.props.validMetrics }
+        />
       case ActionSelector.VIEW_DETAILS:
         return <PointViewer
           focusedPoint={this.props.focusedPoint}
