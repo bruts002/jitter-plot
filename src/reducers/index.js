@@ -1,13 +1,19 @@
+import {
+  max as d3Max,
+  min as d3Min
+} from 'd3';
 import actions from './actions';
 
-const initialState = {
+export const initialState = {
   loading: false,
   mode: 'viewDetails',
   validMetrics: [],
   plots: [],
   selectedPoint: {},
   focusedPoint:  {},
-  chartData: []
+  chartData: [],
+  metricBounds: {},
+  __version: 0
 };
 
 export default (state=initialState, action) => {
@@ -35,6 +41,15 @@ export default (state=initialState, action) => {
         selectedPoint: action.data[0],
         focusedPoint: action.data[0],
         validMetrics: plots,
+        metricBounds: plots.reduce( (acc,metric) => {
+          const metricMax = d3Max(action.data, d => Math.round(d[metric]));
+          const metricMin = d3Min(action.data, d => Math.round(d[metric]));
+          acc[metric] = {
+            upperBound: metricMax,
+            lowerBound: metricMin
+          };
+          return acc;
+        }, {}),
         plots
       });
     case actions.SELECT_POINT:
@@ -44,6 +59,12 @@ export default (state=initialState, action) => {
     case actions.FOCUS_POINT:
       return Object.assign({}, state, {
         focusedPoint: action.data
+      });
+    case actions.UPDATE_METRIC_BOUNDS:
+      return Object.assign({}, state, {
+        metricBounds: Object.assign({}, state.metricBounds, {
+          [action.data.metric]: action.data.bounds
+        })
       });
     default:
       return state;

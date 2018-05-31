@@ -5,7 +5,8 @@ const actions = {
     SET_DATA: 'SET_DATA',
     DEL_DATA_SET: 'DEL_DATA_SET',
     SELECT_POINT: 'SELECT_POINT',
-    FOCUS_POINT: 'FOCUS_POINT'
+    FOCUS_POINT: 'FOCUS_POINT',
+    UPDATE_METRIC_BOUNDS: 'UPDATE_METRIC_BOUNDS'
 };
 
 export const addPlot = metric => ({
@@ -41,6 +42,14 @@ export const selectPoint = point => ({
 export const focusPoint = point => ({
     type: actions.FOCUS_POINT,
     data: point
+});
+
+export const updateMetricBounds = (metric, data) => ({
+    type: actions.UPDATE_METRIC_BOUNDS,
+    data: {
+        bounds: data,
+        metric
+    }
 });
 
 export default actions;

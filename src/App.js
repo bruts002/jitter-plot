@@ -15,7 +15,8 @@ import {
   setData,
   deleteDataSet,
   selectPoint,
-  focusPoint
+  focusPoint,
+  updateMetricBounds
 } from './reducers/actions';
 
 class App extends Component {
@@ -75,6 +76,8 @@ class App extends Component {
         return <FilterData
           chartData={ this.props.chartData }
           validMetrics={ this.props.validMetrics }
+          metricBounds={ this.props.metricBounds }
+          updateMetricBounds={ this.props.updateMetricBounds }
         />
       case ActionSelector.VIEW_DETAILS:
         return <PointViewer
@@ -146,6 +149,7 @@ const mapStateToProps = ({
   mode,
   plots,
   validMetrics,
+  metricBounds,
   chartData,
   selectedPoint,
   focusedPoint,
@@ -153,6 +157,7 @@ const mapStateToProps = ({
   mode,
   plots,
   validMetrics,
+  metricBounds,
   chartData,
   selectedPoint,
   focusedPoint,
@@ -166,6 +171,7 @@ const mapDispatchToProps = dispatch => ({
   deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},
   selectPoint: point => { dispatch(selectPoint(point))},
   focusPoint: point => { dispatch(focusPoint(point))},
+  updateMetricBounds: (metric,data) => { dispatch(updateMetricBounds(metric,data)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
