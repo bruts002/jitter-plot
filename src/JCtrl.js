@@ -7,7 +7,19 @@ import FilterData from './FilterData';
 import PlotAdder from './PlotAdder';
 import ActionSelector from './ActionSelector';
 
-export default props =>
+import { connect } from 'react-redux';
+import {
+    addPlot,
+    delPlot,
+    setMode,
+    setData,
+    deleteDataSet,
+    selectPoint,
+    focusPoint,
+    updateMetricBounds
+} from './reducers/actions';
+
+const JCtrl = props =>
     <div className='jp-ctrl'>
         { renderHeader(props) }
         <hr/>
@@ -92,3 +104,35 @@ const renderAction = ({
             return <div>Unknown mode</div>
     }
 }
+const mapStateToProps = ({
+    mode,
+    plots,
+    validMetrics,
+    metricBounds,
+    chartData,
+    selectedPoint,
+    focusedPoint,
+    loading,
+}) => ({
+    mode,
+    plots,
+    validMetrics,
+    metricBounds,
+    chartData,
+    selectedPoint,
+    focusedPoint,
+    loading,
+})
+
+const mapDispatchToProps = dispatch => ({
+    addPlot: metric => { dispatch(addPlot(metric)) },
+    delPlot: metric => { dispatch(delPlot(metric))},
+    setMode: mode => { dispatch(setMode(mode))},
+    setData: data => { dispatch(setData(data))},
+    deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},
+    selectPoint: point => { dispatch(selectPoint(point))},
+    focusPoint: point => { dispatch(focusPoint(point))},
+    updateMetricBounds: (metric,data) => { dispatch(updateMetricBounds(metric,data)) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(JCtrl);
