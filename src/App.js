@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import Loading from './my-utils/Loading';
 import dataSetAPI from './my-utils/dataSetAPI';
+import JCtrl from './JCtrl';
 import JPlot from './JPlot';
-import PointViewer from './PointViewer';
-import SavedData from './SavedData';
-import FilterData from './FilterData';
-import PlotAdder from './PlotAdder';
-import ActionSelector from './ActionSelector';
 import { connect } from 'react-redux';
 import {
   addPlot,
@@ -59,77 +54,43 @@ class App extends Component {
     } else return idx;
   }
 
-  renderAction(){
-    if (this.props.loading) {
-      return <Loading />
-    }
-    switch (this.props.mode) {
-      case ActionSelector.ADD_PLOT:
-        return <PlotAdder
-          validMetrics={ this.props.validMetrics }
-          addPlot={ metric => this.props.addPlot(metric) } />
-      case ActionSelector.VIEW_SAVED:
-        return <SavedData
-          deleteDataSet={ dataSet => this.props.deleteDataSet(dataSet) }
-          setChartData={ newData => this.props.setData(newData)} />
-      case ActionSelector.FILTER_DATA:
-        return <FilterData
-          chartData={ this.props.chartData }
-          validMetrics={ this.props.validMetrics }
-          metricBounds={ this.props.metricBounds }
-          updateMetricBounds={ this.props.updateMetricBounds }
-        />
-      case ActionSelector.VIEW_DETAILS:
-        return <PointViewer
-          focusedPoint={this.props.focusedPoint}
-          selectedPoint={this.props.selectedPoint} />
-      default:
-        return <div>Unknown mode</div>
-    }
-  }
-
-  selectFromDropDown(id) {
-    let point;
-    this.props.chartData.some( data => {
-      if (data.id === id) {
-        point = data;
-      }
-      return point
-    })
-    this.props.selectPoint(point);
-  }
-
   render() {
+    const {
+      mode,
+      setMode,
+      selectedPoint,
+      selectPoint,
+      chartData,
+      validMetrics,
+      loading,
+      addPlot,
+      deleteDataSet,
+      setData,
+      metricBounds,
+      updateMetricBounds,
+      focusedPoint,
+    } = this.props;
     return (
         <div className='jp-container'>
-          <div className='jp-ctrl'>
-            <div>
-              <label htmlFor='agent'>Agent</label>
-              <select
-                name="agent"
-                value={this.props.selectedPoint.id}
-                onChange={ e => this.selectFromDropDown(+e.target.value)}>
-              {
-                this.props.chartData.map( (point,idx) => (
-                  <option
-                    key={point.id}
-                    value={point.id}>
-                    {point.name || point.first_name || point[this.props.validMetrics[0]]}
-                  </option>
-                ))
-              }
-              </select>
-            </div>
-            <hr />
-            { this.renderAction() }
-            <ActionSelector
-              action={this.props.mode}
-              setAction={ action => this.props.setMode(action)} />
-          </div>
+          <JCtrl
+            mode={mode}
+            setMode={setMode}
+            selectedPoint={selectedPoint}
+            selectPoint={selectPoint}
+            chartData={chartData}
+            validMetrics={validMetrics}
+            loading={loading}
+            addPlot={addPlot}
+            deleteDataSet={deleteDataSet}
+            setData={setData}
+            metricBounds={metricBounds}
+            updateMetricBounds={updateMetricBounds}
+            focusedPoint={focusedPoint}
+          />
           {this.props.plots.map( (metric, idx) => (
             <JPlot
               key={idx+metric}
-              selectedPoint={this.props.selectedPoint}
+              selectedPoint={selectedPoint}
               onPointClick={ point => this.onPointClick(point) }
               focusedPoint={this.props.focusedPoint}
               metric={metric}
