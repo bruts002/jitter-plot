@@ -101,7 +101,7 @@ class App extends Component {
 
   render() {
     return (
-        <div>
+        <div className='jp-container'>
           <div className='jp-ctrl'>
             <div>
               <label htmlFor='agent'>Agent</label>
@@ -126,21 +126,18 @@ class App extends Component {
               action={this.props.mode}
               setAction={ action => this.props.setMode(action)} />
           </div>
-          <div className='jp-holder'>
-          {
-            this.props.plots.map( (metric, idx) => (
-              <JPlot
-                key={idx+metric}
-                selectedPoint={this.props.selectedPoint}
-                onPointClick={ point => this.onPointClick(point) }
-                focusedPoint={this.props.focusedPoint}
-                metric={metric}
-                metricBounds={this.props.metricBounds[metric]}
-                delPlot={ () => this.props.delPlot(metric)}
-                chartData={this.props.chartData} />
+          {this.props.plots.map( (metric, idx) => (
+            <JPlot
+              key={idx+metric}
+              selectedPoint={this.props.selectedPoint}
+              onPointClick={ point => this.onPointClick(point) }
+              focusedPoint={this.props.focusedPoint}
+              metric={metric}
+              metricBounds={this.props.metricBounds[metric]}
+              delPlot={ () => this.props.delPlot(metric)}
+              chartData={this.props.chartData} />
             ))
           }
-          </div>
         </div>
     );
   }

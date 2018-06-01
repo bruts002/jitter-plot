@@ -11,6 +11,15 @@ body {
   color: #A7A7A7;
 }
 
+.jp-containter {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+}
+
+.j-plot {
+  float: right;
+  border:1px solid gray;
+}
 
 .jp-ctrl {
   width: 300px;
