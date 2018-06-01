@@ -135,6 +135,7 @@ class App extends Component {
                 onPointClick={ point => this.onPointClick(point) }
                 focusedPoint={this.props.focusedPoint}
                 metric={metric}
+                metricBounds={this.props.metricBounds[metric]}
                 delPlot={ () => this.props.delPlot(metric)}
                 chartData={this.props.chartData} />
             ))

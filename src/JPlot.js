@@ -36,9 +36,6 @@ class JitterPlot extends Component {
       .scaleLinear()
       .domain([ min, max ])
       .range([ config.height - config.margin.top, 0 ]);
-    const yAxis = d3
-      .axisRight(yScale)
-      .tickValues([ min, max ]);
 
     if (metric.includes('date') || metric.includes('day')) {
       yScale = d3.scaleTime()
@@ -47,7 +44,8 @@ class JitterPlot extends Component {
 
     this.state = {
       yScale,
-      yAxis,
+      max,
+      min
     };
   }
 
@@ -113,8 +111,32 @@ class JitterPlot extends Component {
   render() {
     const {
       metric,
-      chartData
-     } = this.props;
+      chartData,
+      metricBounds
+    } = this.props;
+    const {
+      max,
+      min,
+      yScale
+    } = this.state;
+
+    const tickValues = [ min ];
+    if (metricBounds.lowerBound !== min) {
+      tickValues.push(metricBounds.lowerBound);
+    }
+    if (metricBounds.upperBound !== max &&
+      metricBounds.upperBound !== metricBounds.lowerBound
+    ) {
+      tickValues.push(metricBounds.upperBound);
+    }
+    if (metricBounds.lowerBound !== max) {
+      tickValues.push(max)
+    }
+
+    const yAxis = d3
+      .axisRight(yScale)
+      .tickValues(tickValues);
+
     return (
       <div className='j-plot' style={config.jpStyle}>
         {this.getHeader()}
@@ -127,7 +149,7 @@ class JitterPlot extends Component {
             <g>
               <Axis
                 height={config.height-config.margin.top}
-                axis={this.state.yAxis} />
+                axis={yAxis} />
             {
               this.props.chartData.map( person => (
                 <Point
@@ -159,7 +181,8 @@ class JitterPlot extends Component {
 JitterPlot.defaultProps = {
   chartData: [],
   metric: '',
-  selectedPoint: {}
+  selectedPoint: {},
+  metricBounds: {}
 };
 
 export default JitterPlot;
