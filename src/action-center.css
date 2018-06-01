@@ -1,26 +1,14 @@
 .actionSelector {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+    margin-top: auto;
     padding: 10px;
     background: #262626;
 }
 
-.actionSelector ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    position: relative;
-    top: 20px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.actionSelector ul li {
-    list-style: none;
+.actionSelector__option {
     margin: 0 15px;
+    display: inline-flex;
 }
-.actionSelector ul li span {
+.actionSelector__option span {
     position: relative;
     display: block;
     width: 40px;
@@ -33,7 +21,7 @@
     color: #666;
     transition: 0.5s;
 }
-.actionSelector ul li span::before {
+.actionSelector__option span::before {
     content: '';
     position: absolute;
     top: 0;
@@ -46,13 +34,13 @@
     transform: scale(0.9);
     z-index: -1;
 }
-.actionSelector ul li span.active::before,
-.actionSelector ul li span:hover::before {
+.actionSelector__option span.active::before,
+.actionSelector__option span:hover::before {
     transform: scale(1.1);
     box-shadow: 0 0 15px #ffee10;
 }
-.actionSelector ul li span.active,
-.actionSelector ul li span:hover {
+.actionSelector__option span.active,
+.actionSelector__option span:hover {
     color: #ffee10;
     box-shadow: 0 0 5px #ffee10;
     text-shadow: 0 0 5px #ffee10;

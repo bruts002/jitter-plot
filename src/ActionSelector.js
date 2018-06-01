@@ -7,32 +7,38 @@ class ActionSelector extends Component {
     }
 
     render() {
-      return (
-          <div className="actionSelector">
-            <ul>
-                <li onClick={() => this.props.setAction(ActionSelector.FILTER_DATA)}>
+        return (
+            <div className="actionSelector">
+                <div
+                    className="actionSelector__option"
+                    onClick={() => this.props.setAction(ActionSelector.FILTER_DATA)}>
                     <span className={this.isActive(ActionSelector.FILTER_DATA)}>
                         <i className="fa fa-filter" aria-hidden="true"></i>
-                     </span>
-                </li>
-                <li onClick={() => this.props.setAction(ActionSelector.VIEW_SAVED)}>
+                    </span>
+                </div>
+                <div
+                    className="actionSelector__option"
+                    onClick={() => this.props.setAction(ActionSelector.VIEW_SAVED)}>
                     <span className={this.isActive(ActionSelector.VIEW_SAVED)}>
                         <i className="fa fa-floppy-o" aria-hidden="true"></i>
                     </span>
-                </li>
-                <li onClick={() => this.props.setAction(ActionSelector.VIEW_DETAILS)}>
+                </div>
+                <div
+                    className="actionSelector__option"
+                    onClick={() => this.props.setAction(ActionSelector.VIEW_DETAILS)}>
                     <span className={this.isActive(ActionSelector.VIEW_DETAILS)}>
                         <i className="fa fa-id-card" aria-hidden="true"></i>
                     </span>
-                </li>
-                <li onClick={() => this.props.setAction(ActionSelector.ADD_PLOT)}>
+                </div>
+                <div
+                    className="actionSelector__option"
+                    onClick={() => this.props.setAction(ActionSelector.ADD_PLOT)}>
                     <span className={this.isActive(ActionSelector.ADD_PLOT)}>
                         <i className="fa fa-plus" aria-hidden="true"></i>
                     </span>
-                </li>
-            </ul>
-        </div>
-      );
+                </div>
+            </div>
+        );
     }
 }
 
