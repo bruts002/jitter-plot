@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Axis from './my-utils/Axis';
 import Point from './Point';
 import {
@@ -185,6 +186,18 @@ class JitterPlot extends Component {
       </div>
     );
   }
+}
+
+JitterPlot.propTypes = {
+  chartData: PropTypes.array,
+  metric: PropTypes.string,
+  selectedPoint: PropTypes.shape({
+    id: PropTypes.number
+  }),
+  metricBounds: PropTypes.shape({
+    upperBound: PropTypes.number,
+    lowerBound: PropTypes.number
+  })
 }
 
 JitterPlot.defaultProps = {
