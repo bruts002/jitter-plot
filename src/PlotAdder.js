@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Button from './inputs/Button';
+import Button from './inputs/Button/Button';
 
 const styles = {
     button: {

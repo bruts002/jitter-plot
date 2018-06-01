@@ -1,7 +1,7 @@
 @import 'action-center.css';
 @import 'j-plot.css';
 @import 'plot-viewer.css';
-@import 'inputs/button.css';
+@import 'inputs/inputs.css';
 
 body {
   margin: 0;
