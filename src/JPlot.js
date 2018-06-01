@@ -17,10 +17,6 @@ const config = {
     side: 10
   },
   svgStyle: { padding: '10px' },
-  jpHeader: {
-    padding: '10px',
-    textAlign: 'center'
-  },
   primaryColor: '#ffee10',
   height: 450,
   width: 300,
@@ -83,11 +79,11 @@ class JitterPlot extends Component {
 
     return (
       chartData.length ?
-        <div style={config.jpHeader}>
+        <div className='j-plot__text'>
           <h3>{position}</h3>
           <h4>{percentile}</h4>
         </div> :
-        <div style={config.jpHeader}>
+        <div className='j-plot__text'>
           <h3>&nbsp;</h3>
         </div>
     );
@@ -100,7 +96,7 @@ class JitterPlot extends Component {
       delPlot
     } = this.props;
     return (
-      <div style={config.jpHeader}>
+      <div className='j-plot__text'>
         <span
           className="deleteIcon"
           onClick={ delPlot }>

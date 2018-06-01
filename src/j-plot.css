@@ -17,3 +17,17 @@
     color: rgb(255, 65, 16);
     background: white;
 }
+
+.j-plot hr {
+    width: 100%;
+}
+
+.j-plot {
+    display: flex;
+    flex-direction: column;
+}
+
+.j-plot__text {
+    padding: 10px;
+    text-align: center;
+}
