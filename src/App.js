@@ -42,14 +42,6 @@ class App extends Component {
     console.log('todo: drill into point');
   }
 
-  getKey(point, idx) {
-    if (typeof +point.index === 'number') {
-      return +point.index;
-    } else if (typeof +point.id === 'number') {
-      return +point.id;
-    } else return idx;
-  }
-
   render() {
     const {
       selectedPoint,
