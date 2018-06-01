@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import Axis from './my-utils/Axis';
 import Point from './Point';
-import * as d3 from 'd3';
+import {
+  max as d3Max,
+  min as d3Min,
+  scaleLinear as d3ScaleLinear,
+  scaleTime as d3ScaleTime,
+  axisRight as d3AxisRight,
+} from 'd3';
 
 const config = {
   radius: 10,
@@ -29,16 +35,18 @@ class JitterPlot extends Component {
     super(props);
 
     // set state
-    const { metric } = this.props;
-    const max = d3.max(this.props.chartData, d => Math.round(d[metric]));
-    const min = d3.min(this.props.chartData, d => Math.round(d[metric]));
-    let yScale = d3
-      .scaleLinear()
+    const {
+      metric,
+      chartData
+    } = this.props;
+    const max = d3Max(chartData, d => Math.round(d[metric]));
+    const min = d3Min(chartData, d => Math.round(d[metric]));
+    let yScale = d3ScaleLinear()
       .domain([ min, max ])
       .range([ config.height - config.margin.top, 0 ]);
 
     if (metric.includes('date') || metric.includes('day')) {
-      yScale = d3.scaleTime()
+      yScale = d3ScaleTime()
         .range([ config.height - config.margin.top, min ]);
     }
 
@@ -53,13 +61,13 @@ class JitterPlot extends Component {
     return this.state.yScale(val);
   }
 
-  isSelectedPoint(point) {
-    return this.props.selectedPoint.id === point.id;
+  isSelectedPoint({id}) {
+    return this.props.selectedPoint.id === id;
   }
 
   getFooter() {
     const {
-      selectedPoint,
+      selectedPoint: { id: selectedPointId },
       chartData,
       metric
     } = this.props;
@@ -67,8 +75,8 @@ class JitterPlot extends Component {
     let spIdx = -1;
     chartData.sort( (a, b) => {
       return Math.round(a[metric]) - Math.round(b[metric]);
-    }).some( (curr, idx) => {
-      if (curr.id === selectedPoint.id) {
+    }).some( ({ id: currentId }, idx) => {
+      if (currentId === selectedPointId) {
         spIdx = idx + 1;
       }
       return spIdx !== -1;
@@ -112,7 +120,9 @@ class JitterPlot extends Component {
     const {
       metric,
       chartData,
-      metricBounds
+      metricBounds,
+      focusedPoint,
+      onPointClick,
     } = this.props;
     const {
       max,
@@ -133,8 +143,7 @@ class JitterPlot extends Component {
       tickValues.push(max)
     }
 
-    const yAxis = d3
-      .axisRight(yScale)
+    const yAxis = d3AxisRight(yScale)
       .tickValues(tickValues);
 
     return (
@@ -151,15 +160,15 @@ class JitterPlot extends Component {
                 height={config.height-config.margin.top}
                 axis={yAxis} />
             {
-              this.props.chartData.map( person => (
+              chartData.map( person => (
                 <Point
                   primaryColor={config.primaryColor}
                   key={person.id}
                   cy={this.getY(Math.round(person[metric]))}
                   radius={config.radius}
-                  isFocusedPoint={this.props.focusedPoint === person}
+                  isFocusedPoint={focusedPoint === person}
                   isSelectedPoint={this.isSelectedPoint(person)}
-                  onPointClick={ () => this.props.onPointClick(person) }
+                  onPointClick={ () => onPointClick(person) }
                   data={person} />
               ))
             }
