@@ -1,4 +1,5 @@
 import React from 'react';
+import RangeInput from './inputs/RangeInput/RangeInput';
 
 export default ({
     chartData,
@@ -25,25 +26,13 @@ export default ({
         <h2>Filter Data</h2>
         {validMetrics.map( metric => <div key={metric}>
             <label>{`${metric} : ${optionsMap[metric].min} - ${optionsMap[metric].max}`}</label><br/>
-            {/* <input type="range" max={optionsMap[metric].max} min={optionsMap[metric].min}/> */}
-            <input
-                type='number'
-                onChange={ e => updateMetricBounds(metric, {
-                    lowerBound: +e.target.value,
-                    upperBound: metricBounds[metric].upperBound
-                })}
-                value={metricBounds[metric].lowerBound}
-                max={Math.min(optionsMap[metric].max, metricBounds[metric].upperBound)}
-                min={optionsMap[metric].min}/>
-            <input
-                type='number'
-                onChange={ e => updateMetricBounds(metric, {
-                    upperBound: +e.target.value,
-                    lowerBound: metricBounds[metric].lowerBound
-                })}
-                value={metricBounds[metric].upperBound}
+            <RangeInput
+                min={optionsMap[metric].min}
                 max={optionsMap[metric].max}
-                min={Math.max(optionsMap[metric].min, metricBounds[metric].lowerBound)}/>
+                lowerBound={metricBounds[metric].lowerBound}
+                upperBound={metricBounds[metric].upperBound}
+                onChange={ newBounds => updateMetricBounds(metric, newBounds)}
+            />
         </div>)}
     </div>
 };
