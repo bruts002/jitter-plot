@@ -149,12 +149,15 @@ class JitterPlot extends Component {
             height={config.height-config.margin.top}
             axis={yAxis} />
           {chartData.map( person => <Point
-            primaryColor={config.primaryColor}
+            colors={{
+              selected: config.primaryColor
+            }}
             key={person.id}
             cy={this.getY(Math.round(person[metric]))}
             radius={config.radius}
             isFocusedPoint={focusedPoint === person}
             isSelectedPoint={this.isSelectedPoint(person)}
+            isOutOfRange={metricBounds.lowerBound > person[metric] || metricBounds.upperBound < person[metric]}
             onPointClick={ () => onPointClick(person) }
             data={person} />)
           }

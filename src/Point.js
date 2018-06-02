@@ -39,14 +39,29 @@ class Point extends Component {
   }
 
   getFill() {
-    if (this.props.isSelectedPoint) {
-      if (this.props.primaryColor) {
-        return this.props.primaryColor;
+    const {
+      isOutOfRange,
+      isSelectedPoint,
+      colors: {
+        selected = '#db4437',
+        selectedDisabled = '#d5dc7e',
+        enabled = '#4285f4',
+        disabled = 'lightgray'
+      } = {}
+    } = this.props;
+
+    if (isOutOfRange) {
+      if (isSelectedPoint) {
+        return selectedDisabled;
       } else {
-        return "#db4437";
+        return disabled;
       }
     } else {
-      return "#4285f4";
+      if (isSelectedPoint) {
+        return selected;
+      } else {
+        return enabled;
+      }
     }
   }
 
