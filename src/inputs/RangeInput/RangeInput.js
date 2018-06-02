@@ -6,6 +6,7 @@ export default ({
     lowerBound,
     upperBound,
     onChange,
+    step = Math.round((max - min) / 10),
     resizerWidth = 10
 }) => <div className="range__container">
     <div className="range__inputs">
@@ -15,6 +16,7 @@ export default ({
                 lowerBound: +e.target.value,
                 upperBound
             })}
+            step={step}
             value={lowerBound}
             max={Math.min(max, upperBound)}
             min={min}/>
@@ -24,6 +26,7 @@ export default ({
                 upperBound: +e.target.value,
                 lowerBound
             })}
+            step={step}
             value={upperBound}
             max={max}
             min={Math.max(min, lowerBound)}/>
