@@ -75,7 +75,8 @@ const renderAction = ({
     metricBounds,
     updateMetricBounds,
     focusedPoint,
-    selectedPoint
+    selectedPoint,
+    plots
 }) => {
     if (loading) {
         return <Loading />
@@ -92,7 +93,7 @@ const renderAction = ({
         case ActionSelector.FILTER_DATA:
             return <FilterData
                 chartData={ chartData }
-                validMetrics={ validMetrics }
+                plots={ plots }
                 metricBounds={ metricBounds }
                 updateMetricBounds={ updateMetricBounds }
                 />

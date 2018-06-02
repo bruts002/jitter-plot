@@ -3,13 +3,13 @@ import RangeInput from './inputs/RangeInput/RangeInput';
 
 export default ({
     chartData,
-    validMetrics,
+    plots: metrics,
     metricBounds,
     updateMetricBounds
 }) => {
     const optionsMap = {};
     chartData.forEach( datum => {
-        validMetrics.forEach( metric => {
+        metrics.forEach( metric => {
             if (!optionsMap[metric]) {
                 optionsMap[metric] = {
                     min: datum[metric],
@@ -24,7 +24,7 @@ export default ({
     });
     return <div>
         <h2>Filter Data</h2>
-        {validMetrics.map( metric => <div key={metric}>
+        {metrics.map( metric => <div key={metric}>
             <label>{`${metric} : ${optionsMap[metric].min} - ${optionsMap[metric].max}`}</label><br/>
             <RangeInput
                 min={optionsMap[metric].min}
