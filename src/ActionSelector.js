@@ -1,52 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
+import CircleButton from './inputs/CircleButton/CircleButton';
 
-class ActionSelector extends Component {
+export const USER_ACTIONS = {
+    VIEW_SAVED:   'viewSaved',
+    VIEW_DETAILS: 'viewDetails',
+    ADD_PLOT:     'addPlot',
+    FILTER_DATA:  'filterData',
+};
 
-    isActive(action) {
-        return (this.props.action === action ? 'active' : '');
-    }
-
-    render() {
-        return (
-            <div className="actionSelector">
-                <div
-                    className="actionSelector__option"
-                    onClick={() => this.props.setAction(ActionSelector.FILTER_DATA)}>
-                    <span className={this.isActive(ActionSelector.FILTER_DATA)}>
-                        <i className="fa fa-filter" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div
-                    className="actionSelector__option"
-                    onClick={() => this.props.setAction(ActionSelector.VIEW_SAVED)}>
-                    <span className={this.isActive(ActionSelector.VIEW_SAVED)}>
-                        <i className="fa fa-floppy-o" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div
-                    className="actionSelector__option"
-                    onClick={() => this.props.setAction(ActionSelector.VIEW_DETAILS)}>
-                    <span className={this.isActive(ActionSelector.VIEW_DETAILS)}>
-                        <i className="fa fa-id-card" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div
-                    className="actionSelector__option"
-                    onClick={() => this.props.setAction(ActionSelector.ADD_PLOT)}>
-                    <span className={this.isActive(ActionSelector.ADD_PLOT)}>
-                        <i className="fa fa-plus" aria-hidden="true"></i>
-                    </span>
-                </div>
-            </div>
-        );
-    }
-}
-
-Object.defineProperties(ActionSelector, {
-    VIEW_SAVED:   { value: 'viewSaved'   },
-    VIEW_DETAILS: { value: 'viewDetails' },
-    ADD_PLOT:     { value: 'addPlot'     },
-    FILTER_DATA:  { value: 'filterData'  },
-});
-
-export default ActionSelector;
+export default ({
+    action,
+    setAction,
+}) => <div className="actionSelector">
+    <CircleButton
+        onClick={() => setAction(USER_ACTIONS.FILTER_DATA)}
+        isActive={action === USER_ACTIONS.FILTER_DATA}
+        fontIcon='filter' />
+    <CircleButton
+        onClick={() => setAction(USER_ACTIONS.VIEW_SAVED)}
+        isActive={action === USER_ACTIONS.VIEW_SAVED}
+        fontIcon='floppy-o' />
+    <CircleButton
+        onClick={() => setAction(USER_ACTIONS.VIEW_DETAILS)}
+        isActive={action === USER_ACTIONS.VIEW_DETAILS}
+        fontIcon='id-card' />
+    <CircleButton
+        onClick={() => setAction(USER_ACTIONS.ADD_PLOT)}
+        isActive={action === USER_ACTIONS.ADD_PLOT}
+        fontIcon='plus' />
+</div>

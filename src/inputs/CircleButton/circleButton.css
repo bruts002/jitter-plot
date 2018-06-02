@@ -1,14 +1,20 @@
-.actionSelector {
-    margin-top: auto;
-    padding: 10px;
-    background: #262626;
+.circle-button {
+    box-sizing: border-box;
+    margin: 0 14px;
+    display: inline-flex;
+    border-radius: 50%;
 }
 
-.actionSelector__option {
-    margin: 0 15px;
-    display: inline-flex;
+.circle-button:focus {
+    outline: none;
+    border: #4d90fe solid 2px;
 }
-.actionSelector__option span {
+.circle-button:focus span {
+    transition: 0s;
+    color: #4d90fe;
+}
+
+.circle-button span {
     position: relative;
     display: block;
     width: 40px;
@@ -21,7 +27,7 @@
     color: #666;
     transition: 0.5s;
 }
-.actionSelector__option span::before {
+.circle-button span::before {
     content: '';
     position: absolute;
     top: 0;
@@ -34,13 +40,13 @@
     transform: scale(0.9);
     z-index: -1;
 }
-.actionSelector__option span.active::before,
-.actionSelector__option span:hover::before {
+.circle-button span.active::before,
+.circle-button span:hover::before {
     transform: scale(1.1);
     box-shadow: 0 0 15px #ffee10;
 }
-.actionSelector__option span.active,
-.actionSelector__option span:hover {
+.circle-button span.active,
+.circle-button span:hover {
     color: #ffee10;
     box-shadow: 0 0 5px #ffee10;
     text-shadow: 0 0 5px #ffee10;

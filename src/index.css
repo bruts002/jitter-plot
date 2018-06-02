@@ -1,4 +1,3 @@
-@import 'action-center.css';
 @import 'j-plot.css';
 @import 'plot-viewer.css';
 @import 'inputs/inputs.css';
@@ -66,4 +65,10 @@ tr.focused {
 
 .saved-data-set {
   cursor: pointer;
+}
+
+.actionSelector {
+    margin-top: auto;
+    padding: 10px;
+    background: #262626;
 }

@@ -5,7 +5,7 @@ import PointViewer from './PointViewer';
 import SavedData from './SavedData';
 import FilterData from './FilterData';
 import PlotAdder from './PlotAdder';
-import ActionSelector from './ActionSelector';
+import ActionSelector, { USER_ACTIONS } from './ActionSelector';
 
 import { connect } from 'react-redux';
 import {
@@ -26,7 +26,7 @@ const JCtrl = props =>
         { renderAction(props) }
         <ActionSelector
             action={props.mode}
-            setAction={ action => props.setMode(action)} />
+            setAction={props.setMode} />
     </div>
 
 const renderHeader = ({
@@ -82,22 +82,22 @@ const renderAction = ({
         return <Loading />
     }
     switch (mode) {
-        case ActionSelector.ADD_PLOT:
+        case USER_ACTIONS.ADD_PLOT:
             return <PlotAdder
                 validMetrics={ validMetrics }
                 addPlot={ metric => addPlot(metric) } />
-        case ActionSelector.VIEW_SAVED:
+        case USER_ACTIONS.VIEW_SAVED:
             return <SavedData
                 deleteDataSet={ dataSet => deleteDataSet(dataSet) }
                 setChartData={ newData => setData(newData)} />
-        case ActionSelector.FILTER_DATA:
+        case USER_ACTIONS.FILTER_DATA:
             return <FilterData
                 chartData={ chartData }
                 plots={ plots }
                 metricBounds={ metricBounds }
                 updateMetricBounds={ updateMetricBounds }
                 />
-        case ActionSelector.VIEW_DETAILS:
+        case USER_ACTIONS.VIEW_DETAILS:
             return <PointViewer
                 focusedPoint={focusedPoint}
                 selectedPoint={selectedPoint} />
