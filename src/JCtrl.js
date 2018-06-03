@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Loading from './my-utils/Loading';
+import CircleButton from './inputs/CircleButton/CircleButton';
+import Button from './inputs/Button/Button';
 import PointViewer from './PointViewer';
 import SavedData from './SavedData';
 import FilterData from './FilterData';
@@ -12,6 +14,7 @@ import {
     addPlot,
     delPlot,
     setMode,
+    showConfig,
     setData,
     deleteDataSet,
     selectPoint,
@@ -21,6 +24,7 @@ import {
 
 const JCtrl = props =>
     <div className='jp-ctrl'>
+        { renderConfig(props) }
         { renderHeader(props) }
         <hr/>
         { renderAction(props) }
@@ -29,27 +33,50 @@ const JCtrl = props =>
             setAction={props.setMode} />
     </div>
 
+const renderConfig = ({
+    configOpen,
+    showConfig
+}) => <div
+    className={`jp-ctrl__config ${configOpen ? 'jp-ctrl__config--show' : ''}`}>
+    <h2>Config</h2>
+    <Button
+        display='OK'
+        styles={{
+            bottom: '30px',
+            right: '100px' 
+        }}
+        onClick={ () => showConfig(false)}
+        />
+</div>
+
 const renderHeader = ({
+    showConfig,
     selectedPoint,
     selectPoint,
     chartData,
     validMetrics,
     mode,
     setMode
-}) => <div>
-    <label htmlFor='agent'>Agent</label>
-    <select
-        name='agent'
-        value={selectedPoint.id}
-        onChange={getAgentOnChange(chartData, selectPoint)}>
-        {chartData.map( (point,idx) => (
-            <option
-                key={point.id}
-                value={point.id}>
-                {point.name || point.first_name || point[validMetrics[0]]}
-            </option>
-        ))}
-    </select>
+}) => <div className='jp-ctrl__header'>
+    <div>
+        <label htmlFor='agent'>Agent</label>
+        <select
+            name='agent'
+            value={selectedPoint.id}
+            onChange={getAgentOnChange(chartData, selectPoint)}>
+            {chartData.map( (point,idx) => (
+                <option
+                    key={point.id}
+                    value={point.id}>
+                    {point.name || point.first_name || point[validMetrics[0]]}
+                </option>
+            ))}
+        </select>
+    </div>
+    <CircleButton
+        fontIcon='cog'
+        isActive=''
+        onClick={ () => showConfig(true)} />
 </div>
 
 const getAgentOnChange = (chartData, selectPoint) => event => {
@@ -107,6 +134,7 @@ const renderAction = ({
 }
 const mapStateToProps = ({
     mode,
+    configOpen,
     plots,
     validMetrics,
     metricBounds,
@@ -116,6 +144,7 @@ const mapStateToProps = ({
     loading,
 }) => ({
     mode,
+    configOpen,
     plots,
     validMetrics,
     metricBounds,
@@ -130,6 +159,7 @@ const mapDispatchToProps = dispatch => ({
     delPlot: metric => { dispatch(delPlot(metric))},
     setMode: mode => { dispatch(setMode(mode))},
     setData: data => { dispatch(setData(data))},
+    showConfig: show => { dispatch(showConfig(show))},
     deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},
     selectPoint: point => { dispatch(selectPoint(point))},
     focusPoint: point => { dispatch(focusPoint(point))},

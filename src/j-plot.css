@@ -25,6 +25,7 @@
 .j-plot {
     display: flex;
     flex-direction: column;
+    border:1px solid gray;
 }
 
 .j-plot__text {

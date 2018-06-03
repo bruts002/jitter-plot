@@ -13,6 +13,7 @@ export const initialState = {
   focusedPoint:  {},
   chartData: [],
   metricBounds: {},
+  configOpen: false,
   __version: 0
 };
 
@@ -30,6 +31,10 @@ export default (state=initialState, action) => {
       return Object.assign({}, state, {
         mode: action.data
       });
+    case actions.SHOW_CONFIG:
+      return Object.assign({}, state, {
+        configOpen: action.data
+      })
     case actions.DEL_DATA_SET:
       return state;
     case actions.SET_DATA:

@@ -2,6 +2,7 @@ const actions = {
     ADD_PLOT: 'ADD_PLOT',
     DEL_PLOT: 'DEL_PLOT',
     SET_MODE: 'SET_MODE',
+    SHOW_CONFIG: 'SHOW_CONFIG',
     SET_DATA: 'SET_DATA',
     DEL_DATA_SET: 'DEL_DATA_SET',
     SELECT_POINT: 'SELECT_POINT',
@@ -23,6 +24,11 @@ export const setMode = mode => ({
     type: actions.SET_MODE,
     data: mode
 });
+
+export const showConfig = data => ({
+    type: actions.SHOW_CONFIG,
+    data
+})
 
 export const deleteDataSet = dataSet => ({
     type: actions.DEL_DATA_SET,
