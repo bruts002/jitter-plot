@@ -7,7 +7,9 @@ const actions = {
     DEL_DATA_SET: 'DEL_DATA_SET',
     SELECT_POINT: 'SELECT_POINT',
     FOCUS_POINT: 'FOCUS_POINT',
-    UPDATE_METRIC_BOUNDS: 'UPDATE_METRIC_BOUNDS'
+    UPDATE_METRIC_BOUNDS: 'UPDATE_METRIC_BOUNDS',
+    // user config actions
+    PRIMARY_COLOR_CHANGE: 'PRIMARY_COLOR_CHANGE',
 };
 
 export const addPlot = metric => ({
@@ -56,6 +58,11 @@ export const updateMetricBounds = (metric, data) => ({
         bounds: data,
         metric
     }
+});
+
+export const changePrimaryColor = color => ({
+    type: actions.PRIMARY_COLOR_CHANGE,
+    data: color
 });
 
 export default actions;

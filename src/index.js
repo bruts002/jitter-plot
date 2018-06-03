@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import './index.css';
 import App from './App';
-import mainReducer, { initialState } from './reducers';
+import mainReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
+import migrate from './migrations';
 
 const localStorageMiddleWare = ({getState}) => {
     return next => action => {
@@ -18,11 +19,7 @@ const localStorageMiddleWare = ({getState}) => {
 const reHydrateStore = () => {
     if (localStorage.getItem('reduxState') !== null) {
         const savedStore = JSON.parse(localStorage.getItem('reduxState'));
-        if (savedStore.__version === initialState.__version) {
-            return savedStore;
-        } else {
-            // TODO: add migration scripts
-        }
+        return migrate(savedStore);
     } 
 };
 

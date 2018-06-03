@@ -19,7 +19,8 @@ import {
     deleteDataSet,
     selectPoint,
     focusPoint,
-    updateMetricBounds
+    updateMetricBounds,
+    changePrimaryColor
 } from './reducers/actions';
 
 const JCtrl = props =>
@@ -35,10 +36,22 @@ const JCtrl = props =>
 
 const renderConfig = ({
     configOpen,
-    showConfig
+    showConfig,
+    changePrimaryColor,
+    userConfig
 }) => <div
     className={`jp-ctrl__config ${configOpen ? 'jp-ctrl__config--show' : ''}`}>
     <h2>Config</h2>
+    <hr/>
+    <h3>Colors</h3>
+
+    <label htmlFor='primaryColor'>Primary</label>
+    <input
+        type='text'
+        name='primaryColor'
+        onChange={ ({target: {value}}) => changePrimaryColor(value) }
+        value={userConfig.colors.primary} />
+
     <Button
         display='OK'
         styles={{
@@ -142,6 +155,7 @@ const mapStateToProps = ({
     selectedPoint,
     focusedPoint,
     loading,
+    userConfig,
 }) => ({
     mode,
     configOpen,
@@ -152,6 +166,7 @@ const mapStateToProps = ({
     selectedPoint,
     focusedPoint,
     loading,
+    userConfig,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -163,7 +178,8 @@ const mapDispatchToProps = dispatch => ({
     deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},
     selectPoint: point => { dispatch(selectPoint(point))},
     focusPoint: point => { dispatch(focusPoint(point))},
-    updateMetricBounds: (metric,data) => { dispatch(updateMetricBounds(metric,data)) }
+    updateMetricBounds: (metric,data) => { dispatch(updateMetricBounds(metric,data)) },
+    changePrimaryColor: color => { dispatch(changePrimaryColor(color))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JCtrl);

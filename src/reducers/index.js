@@ -3,6 +3,7 @@ import {
   min as d3Min
 } from 'd3';
 import actions from './actions';
+import userConfigReducer, { initialUserConfig } from './userConfig';
 
 export const initialState = {
   loading: false,
@@ -14,7 +15,8 @@ export const initialState = {
   chartData: [],
   metricBounds: {},
   configOpen: false,
-  __version: 0
+  userConfig: initialUserConfig,
+  __version: 1
 };
 
 export default (state=initialState, action) => {
@@ -70,6 +72,10 @@ export default (state=initialState, action) => {
         metricBounds: Object.assign({}, state.metricBounds, {
           [action.data.metric]: action.data.bounds
         })
+      });
+    case actions.PRIMARY_COLOR_CHANGE:
+      return Object.assign({}, state, {
+        userConfig: userConfigReducer(state.userConfig, action)
       });
     default:
       return state;
