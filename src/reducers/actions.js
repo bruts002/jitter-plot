@@ -9,6 +9,7 @@ const actions = {
     FOCUS_POINT: 'FOCUS_POINT',
     UPDATE_METRIC_BOUNDS: 'UPDATE_METRIC_BOUNDS',
     // user config actions
+    UPDATE_PRIMARY_COLOR_DEFAULT: 'UPDATE_PRIMARY_COLOR_DEFAULT',
     PRIMARY_COLOR_CHANGE: 'PRIMARY_COLOR_CHANGE',
 };
 
@@ -64,5 +65,10 @@ export const changePrimaryColor = color => ({
     type: actions.PRIMARY_COLOR_CHANGE,
     data: color
 });
+
+export const updatePrimaryColorDefault = data => ({
+    type: actions.UPDATE_PRIMARY_COLOR_DEFAULT,
+    data
+})
 
 export default actions;

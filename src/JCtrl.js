@@ -2,7 +2,7 @@ import React from 'react';
 
 import Loading from './my-utils/Loading';
 import CircleButton from './inputs/CircleButton/CircleButton';
-import Button from './inputs/Button/Button';
+import UserConfig from './UserConfig';
 import PointViewer from './PointViewer';
 import SavedData from './SavedData';
 import FilterData from './FilterData';
@@ -20,12 +20,11 @@ import {
     selectPoint,
     focusPoint,
     updateMetricBounds,
-    changePrimaryColor
 } from './reducers/actions';
 
 const JCtrl = props =>
     <div className='jp-ctrl'>
-        { renderConfig(props) }
+        <UserConfig />
         { renderHeader(props) }
         <hr/>
         { renderAction(props) }
@@ -33,34 +32,6 @@ const JCtrl = props =>
             action={props.mode}
             setAction={props.setMode} />
     </div>
-
-const renderConfig = ({
-    configOpen,
-    showConfig,
-    changePrimaryColor,
-    userConfig
-}) => <div
-    className={`jp-ctrl__config ${configOpen ? 'jp-ctrl__config--show' : ''}`}>
-    <h2>Config</h2>
-    <hr/>
-    <h3>Colors</h3>
-
-    <label htmlFor='primaryColor'>Primary</label>
-    <input
-        type='text'
-        name='primaryColor'
-        onChange={ ({target: {value}}) => changePrimaryColor(value) }
-        value={userConfig.colors.primary} />
-
-    <Button
-        display='OK'
-        styles={{
-            bottom: '30px',
-            right: '100px' 
-        }}
-        onClick={ () => showConfig(false)}
-        />
-</div>
 
 const renderHeader = ({
     showConfig,
@@ -147,7 +118,6 @@ const renderAction = ({
 }
 const mapStateToProps = ({
     mode,
-    configOpen,
     plots,
     validMetrics,
     metricBounds,
@@ -158,7 +128,6 @@ const mapStateToProps = ({
     userConfig,
 }) => ({
     mode,
-    configOpen,
     plots,
     validMetrics,
     metricBounds,
@@ -179,7 +148,6 @@ const mapDispatchToProps = dispatch => ({
     selectPoint: point => { dispatch(selectPoint(point))},
     focusPoint: point => { dispatch(focusPoint(point))},
     updateMetricBounds: (metric,data) => { dispatch(updateMetricBounds(metric,data)) },
-    changePrimaryColor: color => { dispatch(changePrimaryColor(color))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JCtrl);

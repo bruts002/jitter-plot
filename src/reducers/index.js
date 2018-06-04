@@ -74,6 +74,7 @@ export default (state=initialState, action) => {
         })
       });
     case actions.PRIMARY_COLOR_CHANGE:
+    case actions.UPDATE_PRIMARY_COLOR_DEFAULT:
       return Object.assign({}, state, {
         userConfig: userConfigReducer(state.userConfig, action)
       });

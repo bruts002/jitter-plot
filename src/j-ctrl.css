@@ -29,6 +29,11 @@
     flex: 1 0 760px;
 }
 
+.jp-ctrl__config-option {
+    display: flex;
+    align-items: center;
+}
+
 .jp-ctrl hr {
     width: 100%;
 }
