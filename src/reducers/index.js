@@ -1,3 +1,4 @@
+import dataSetAPI from '../my-utils/dataSetAPI';
 import {
   max as d3Max,
   min as d3Min
@@ -36,7 +37,10 @@ export default (state=initialState, action) => {
     case actions.SHOW_CONFIG:
       return Object.assign({}, state, {
         configOpen: action.data
-      })
+      });
+    case actions.SAVE_DATA:
+      dataSetAPI.saveData(action.data.name, action.data.data);
+      return state;
     case actions.DEL_DATA_SET:
       // TODO:
       return state;

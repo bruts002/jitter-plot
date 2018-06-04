@@ -3,6 +3,7 @@ const actions = {
     DEL_PLOT: 'DEL_PLOT',
     SET_MODE: 'SET_MODE',
     SHOW_CONFIG: 'SHOW_CONFIG',
+    SAVE_DATA: 'SAVE_DATA',
     SET_DATA: 'SET_DATA',
     DEL_DATA_SET: 'DEL_DATA_SET',
     SELECT_POINT: 'SELECT_POINT',
@@ -41,6 +42,11 @@ export const deleteDataSet = dataSet => ({
 export const setData = data => ({
     type: actions.SET_DATA,
     data
+});
+
+export const saveData = file => ({
+    type: actions.SAVE_DATA,
+    data: file
 });
 
 export const selectPoint = point => ({
