@@ -38,6 +38,7 @@ export default (state=initialState, action) => {
         configOpen: action.data
       })
     case actions.DEL_DATA_SET:
+      // TODO:
       return state;
     case actions.SET_DATA:
       const plots = Object
