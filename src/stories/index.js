@@ -29,7 +29,7 @@ storiesOf('JPlot', module)
     focusedPoint={{age: 0, id: 0}}
     metric={'age'}
     delPlot={ action('Plot delete clicked') }
-    chartData={[
+    data={[
       { age: 0, id: 0 },
       { age: 1, id: 1 },
       { age: 2, id: 2 },

@@ -1,34 +1,18 @@
-import {
-  max as d3Max,
-  min as d3Min
-} from 'd3';
 import actions from './actions';
 import userConfigReducer, { initialUserConfig } from './userConfig';
+import dataSetReducer, { initialDataSet } from './dataSet';
 
 export const initialState = {
   loading: false,
   mode: 'viewDetails',
-  validMetrics: [],
-  plots: [],
-  selectedPoint: {},
-  focusedPoint:  {},
-  chartData: [],
-  metricBounds: {},
   configOpen: false,
   userConfig: initialUserConfig,
+  dataSet: initialDataSet,
   __version: 1
 };
 
 export default (state=initialState, action) => {
   switch (action.type) {
-    case actions.ADD_PLOT:
-      return Object.assign({}, state, {
-        plots: [...state.plots, action.data]
-      });
-    case actions.DEL_PLOT:
-      return Object.assign({}, state, {
-        plots: state.plots.filter( plot => plot !== action.data )
-      });
     case actions.SET_MODE:
       return Object.assign({}, state, {
         mode: action.data
@@ -37,46 +21,19 @@ export default (state=initialState, action) => {
       return Object.assign({}, state, {
         configOpen: action.data
       })
-    case actions.DEL_DATA_SET:
-      return state;
-    case actions.SET_DATA:
-      const plots = Object
-        .keys(action.data[0])
-        .filter( key => !isNaN(+action.data[0][key]));
-      return Object.assign({}, state, {
-        chartData: action.data,
-        selectedPoint: action.data[0],
-        focusedPoint: action.data[0],
-        validMetrics: plots,
-        metricBounds: plots.reduce( (acc,metric) => {
-          const metricMax = d3Max(action.data, d => Math.round(d[metric]));
-          const metricMin = d3Min(action.data, d => Math.round(d[metric]));
-          acc[metric] = {
-            upperBound: metricMax,
-            lowerBound: metricMin
-          };
-          return acc;
-        }, {}),
-        plots
-      });
-    case actions.SELECT_POINT:
-      return Object.assign({}, state, {
-        selectedPoint: action.data
-      });
-    case actions.FOCUS_POINT:
-      return Object.assign({}, state, {
-        focusedPoint: action.data
-      });
-    case actions.UPDATE_METRIC_BOUNDS:
-      return Object.assign({}, state, {
-        metricBounds: Object.assign({}, state.metricBounds, {
-          [action.data.metric]: action.data.bounds
-        })
-      });
     case actions.PRIMARY_COLOR_CHANGE:
     case actions.UPDATE_PRIMARY_COLOR_DEFAULT:
       return Object.assign({}, state, {
         userConfig: userConfigReducer(state.userConfig, action)
+      });
+    case actions.UPDATE_METRIC_BOUNDS:
+    case actions.SELECT_POINT:
+    case actions.FOCUS_POINT:
+    case actions.SAVE_DATA_SET:
+    case actions.SET_DATA_SET:
+    case actions.DEL_DATA_SET:
+      return Object.assign({}, state, {
+        dataSet: dataSetReducer(state.dataSet, action)
       });
     default:
       return state;

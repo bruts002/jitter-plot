@@ -30,10 +30,10 @@ class JitterPlot extends Component {
     // set state
     const {
       metric,
-      chartData
+      data
     } = this.props;
-    const max = d3Max(chartData, d => Math.round(d[metric]));
-    const min = d3Min(chartData, d => Math.round(d[metric]));
+    const max = d3Max(data, d => Math.round(d[metric]));
+    const min = d3Min(data, d => Math.round(d[metric]));
     let yScale = d3ScaleLinear()
       .domain([ min, max ])
       .range([ config.height - config.margin.top, 0 ]);
@@ -61,12 +61,12 @@ class JitterPlot extends Component {
   renderFooter() {
     const {
       selectedPoint: { id: selectedPointId },
-      chartData,
+      data,
       metric
     } = this.props;
 
     let spIdx = -1;
-    chartData.sort( (a, b) => {
+    data.sort( (a, b) => {
       return Math.round(a[metric]) - Math.round(b[metric]);
     }).some( ({ id: currentId }, idx) => {
       if (currentId === selectedPointId) {
@@ -74,11 +74,11 @@ class JitterPlot extends Component {
       }
       return spIdx !== -1;
     });
-    const position = `${spIdx} of ${chartData.length}`;
-    const percentile = 'Percentile: ' + Math.round(spIdx / chartData.length * 100) + '%';
+    const position = `${spIdx} of ${data.length}`;
+    const percentile = 'Percentile: ' + Math.round(spIdx / data.length * 100) + '%';
 
     return (
-      chartData.length ?
+      data.length ?
         <div className='j-plot__text'>
           <h3>{position}</h3>
           <h4>{percentile}</h4>
@@ -92,7 +92,7 @@ class JitterPlot extends Component {
   renderHeader() {
     const {
       metric,
-      chartData,
+      data,
       delPlot
     } = this.props;
     return (
@@ -104,7 +104,7 @@ class JitterPlot extends Component {
             className="fa fa-times-circle"
             aria-hidden="true"></i>
         </span>
-        <h2>{chartData.length ? metric : 'No Data'}</h2>
+        <h2>{data.length ? metric : 'No Data'}</h2>
       </div>
     );
   }
@@ -112,7 +112,7 @@ class JitterPlot extends Component {
   renderBody() {
     const {
       metric,
-      chartData,
+      data,
       metricBounds,
       focusedPoint,
       onPointClick,
@@ -139,7 +139,7 @@ class JitterPlot extends Component {
     const yAxis = d3AxisRight(yScale)
       .tickValues(tickValues);
 
-    return chartData.length ?
+    return data.length ?
       <svg
         width={config.width}
         height={config.height}
@@ -148,7 +148,7 @@ class JitterPlot extends Component {
           <Axis
             height={config.height-config.margin.top}
             axis={yAxis} />
-          {chartData.map( person => <Point
+          {data.map( person => <Point
             colors={{
               selected: config.primaryColor
             }}
@@ -183,7 +183,7 @@ class JitterPlot extends Component {
 }
 
 JitterPlot.propTypes = {
-  chartData: PropTypes.array,
+  data: PropTypes.array,
   metric: PropTypes.string,
   selectedPoint: PropTypes.shape({
     id: PropTypes.number
@@ -195,7 +195,7 @@ JitterPlot.propTypes = {
 }
 
 JitterPlot.defaultProps = {
-  chartData: [],
+  data: [],
   metric: '',
   selectedPoint: {},
   metricBounds: {}

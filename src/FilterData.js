@@ -2,13 +2,13 @@ import React from 'react';
 import RangeInput from './inputs/RangeInput/RangeInput';
 
 export default ({
-    chartData,
+    data,
     plots: metrics,
     metricBounds,
     updateMetricBounds
 }) => {
     const optionsMap = {};
-    chartData.forEach( datum => {
+    data.forEach( datum => {
         metrics.forEach( metric => {
             if (!optionsMap[metric]) {
                 optionsMap[metric] = {

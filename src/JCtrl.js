@@ -15,7 +15,7 @@ import {
     delPlot,
     setMode,
     showConfig,
-    setData,
+    setDataSet,
     deleteDataSet,
     selectPoint,
     focusPoint,
@@ -37,7 +37,7 @@ const renderHeader = ({
     showConfig,
     selectedPoint,
     selectPoint,
-    chartData,
+    data,
     validMetrics,
     mode,
     setMode
@@ -47,8 +47,8 @@ const renderHeader = ({
         <select
             name='agent'
             value={selectedPoint.id}
-            onChange={getAgentOnChange(chartData, selectPoint)}>
-            {chartData.map( (point,idx) => (
+            onChange={getAgentOnChange(data, selectPoint)}>
+            {data.map( (point,idx) => (
                 <option
                     key={point.id}
                     value={point.id}>
@@ -63,10 +63,10 @@ const renderHeader = ({
         onClick={ () => showConfig(true)} />
 </div>
 
-const getAgentOnChange = (chartData, selectPoint) => event => {
+const getAgentOnChange = (data, selectPoint) => event => {
     const id = +event.target.value;
     let point;
-    chartData.some( data => {
+    data.some( data => {
         if (data.id === id) {
             point = data;
         }
@@ -81,8 +81,8 @@ const renderAction = ({
     validMetrics,
     addPlot,
     deleteDataSet,
-    setData,
-    chartData,
+    setDataSet,
+    data,
     metricBounds,
     updateMetricBounds,
     focusedPoint,
@@ -100,10 +100,10 @@ const renderAction = ({
         case USER_ACTIONS.VIEW_SAVED:
             return <SavedData
                 deleteDataSet={ dataSet => deleteDataSet(dataSet) }
-                setChartData={ newData => setData(newData)} />
+                setChartData={ newData => setDataSet(newData)} />
         case USER_ACTIONS.FILTER_DATA:
             return <FilterData
-                chartData={ chartData }
+                data={ data }
                 plots={ plots }
                 metricBounds={ metricBounds }
                 updateMetricBounds={ updateMetricBounds }
@@ -118,12 +118,14 @@ const renderAction = ({
 }
 const mapStateToProps = ({
     mode,
-    plots,
-    validMetrics,
-    metricBounds,
-    chartData,
-    selectedPoint,
-    focusedPoint,
+    dataSet: {
+        plots,
+        validMetrics,
+        data,
+        selectedPoint,
+        focusedPoint,
+        metricBounds,
+    },
     loading,
     userConfig,
 }) => ({
@@ -131,7 +133,7 @@ const mapStateToProps = ({
     plots,
     validMetrics,
     metricBounds,
-    chartData,
+    data,
     selectedPoint,
     focusedPoint,
     loading,
@@ -142,7 +144,7 @@ const mapDispatchToProps = dispatch => ({
     addPlot: metric => { dispatch(addPlot(metric)) },
     delPlot: metric => { dispatch(delPlot(metric))},
     setMode: mode => { dispatch(setMode(mode))},
-    setData: data => { dispatch(setData(data))},
+    setDataSet: data => { dispatch(setDataSet(data))},
     showConfig: show => { dispatch(showConfig(show))},
     deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},
     selectPoint: point => { dispatch(selectPoint(point))},

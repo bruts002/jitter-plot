@@ -5,7 +5,7 @@ import JPlot from './JPlot';
 import { connect } from 'react-redux';
 import {
   delPlot,
-  setData,
+  setDataSet,
   selectPoint,
   focusPoint,
 } from './reducers/actions';
@@ -22,8 +22,8 @@ class App extends Component {
       .then( data => data.json())
       .then( resp => {
         saveData('Random People', resp);
-        if (_this.props.chartData.length === 0) {
-          _this.props.setData(resp);
+        if (_this.props.data.length === 0) {
+          _this.props.setDataSet(resp);
         }
       });
   }
@@ -46,7 +46,7 @@ class App extends Component {
     const {
       selectedPoint,
       plots,
-      chartData,
+      data,
       delPlot,
       metricBounds,
       focusedPoint,
@@ -68,7 +68,7 @@ class App extends Component {
                   metric={metric}
                   metricBounds={metricBounds[metric]}
                   delPlot={ () => delPlot(metric)}
-                  chartData={chartData} />
+                  data={data} />
                 ))
               }
             </div>
@@ -79,22 +79,24 @@ class App extends Component {
 }
 
 const mapStateToProps = ({
-  plots,
-  metricBounds,
-  chartData,
-  selectedPoint,
-  focusedPoint,
+  dataSet: {
+    plots,
+    metricBounds,
+    data,
+    selectedPoint,
+    focusedPoint,
+  }
 }) => ({
   plots,
   metricBounds,
-  chartData,
+  data,
   selectedPoint,
   focusedPoint,
 })
 
 const mapDispatchToProps = dispatch => ({
   delPlot: metric => { dispatch(delPlot(metric))},
-  setData: data => { dispatch(setData(data))},
+  setDataSet: data => { dispatch(setDataSet(data))},
   selectPoint: point => { dispatch(selectPoint(point))},
   focusPoint: point => { dispatch(focusPoint(point))},
 })

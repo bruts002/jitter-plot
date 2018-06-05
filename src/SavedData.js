@@ -19,7 +19,7 @@ class SavedData extends Component {
         return Object.keys(
             JSON.parse(
                 window.localStorage.getItem('savedDataSets')
-            )
+            ) || {}
         );
     }
 

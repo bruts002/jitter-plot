@@ -3,14 +3,16 @@ const actions = {
     DEL_PLOT: 'DEL_PLOT',
     SET_MODE: 'SET_MODE',
     SHOW_CONFIG: 'SHOW_CONFIG',
-    SET_DATA: 'SET_DATA',
-    DEL_DATA_SET: 'DEL_DATA_SET',
     SELECT_POINT: 'SELECT_POINT',
     FOCUS_POINT: 'FOCUS_POINT',
     UPDATE_METRIC_BOUNDS: 'UPDATE_METRIC_BOUNDS',
     // user config actions
     UPDATE_PRIMARY_COLOR_DEFAULT: 'UPDATE_PRIMARY_COLOR_DEFAULT',
     PRIMARY_COLOR_CHANGE: 'PRIMARY_COLOR_CHANGE',
+    // data set actions
+    SAVE_DATA_SET: 'SAVE_DATA_SET',
+    SET_DATA_SET: 'SET_DATA_SET',
+    DEL_DATA_SET: 'DEL_DATA_SET',
 };
 
 export const addPlot = metric => ({
@@ -38,8 +40,8 @@ export const deleteDataSet = dataSet => ({
     data: dataSet
 });
 
-export const setData = data => ({
-    type: actions.SET_DATA,
+export const setDataSet = data => ({
+    type: actions.SET_DATA_SET,
     data
 });
 
