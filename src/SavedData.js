@@ -28,7 +28,7 @@ class SavedData extends Component {
 
     setData(entry) {
         const savedData = dataSetAPI.getData(entry);
-        this.props.setData(savedData);
+        this.props.setChartData(savedData);
     }
 
     setSaved(fileNames) {
@@ -58,7 +58,7 @@ class SavedData extends Component {
                 </li>
             ))}
             </ul>
-            <DataUploader setData={ this.props.setData } />
+            <DataUploader setChartData={ newData => this.props.setChartData(newData)} />
         </div>
       );
     }

@@ -100,7 +100,7 @@ const renderAction = ({
         case USER_ACTIONS.VIEW_SAVED:
             return <SavedData
                 deleteDataSet={ dataSet => deleteDataSet(dataSet) }
-                setData={ setData } />
+                setChartData={ newData => setData(newData)} />
         case USER_ACTIONS.FILTER_DATA:
             return <FilterData
                 chartData={ chartData }

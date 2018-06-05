@@ -34,7 +34,7 @@ class DataUploader extends Component {
       } else {
         // save to localstorage
         dataSetAPI.saveData(this.state.fileName, data);
-        this.props.setData(data);
+        this.props.setChartData(data);
       }
   }
 
