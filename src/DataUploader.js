@@ -46,7 +46,7 @@ class DataUploader extends Component {
                 fileName: fileName
             });
             reader = new FileReader();
-            reader.onload = this.fileHandler.bind(this);
+            reader.onload = evt => this.fileHandler(evt);
             reader.readAsText(evt.target.files[0]);
         } else {
             //TODO: handle bad file type
