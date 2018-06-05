@@ -1,5 +1,3 @@
-const getData = name => JSON.parse(window.localStorage.getItem(name));
-
 const saveData = (name, data) => {
     let savedDataSets = window.localStorage.getItem('savedDataSets');
     if (savedDataSets !== null) {
@@ -26,7 +24,6 @@ const deleteDataSet = dataSet => {
 };
 
 export default {
-    getData,
     saveData,
     deleteDataSet
 };

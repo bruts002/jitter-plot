@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import DataUploader from './DataUploader';
-import dataSetAPI from './my-utils/dataSetAPI';
 
 class SavedData extends Component {
     constructor(props){
-        // TODO: have this be a funciton, not class
-        // TODO: don't call localstorage here, have the reducer do that
         super(props);
 
         this.state = {
@@ -27,7 +24,7 @@ class SavedData extends Component {
     }
 
     setData(entry) {
-        const savedData = dataSetAPI.getData(entry);
+        var savedData = JSON.parse(window.localStorage.getItem(entry));
         this.props.setChartData(savedData);
     }
 
