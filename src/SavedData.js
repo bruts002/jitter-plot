@@ -58,9 +58,7 @@ class SavedData extends Component {
                 </li>
             ))}
             </ul>
-           <DataUploader
-                setData={ this.props.setData }
-                saveData={ this.props.saveData } />
+            <DataUploader setData={ this.props.setData } />
         </div>
       );
     }
