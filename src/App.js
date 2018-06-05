@@ -54,18 +54,25 @@ class App extends Component {
     return (
         <div className='jp-container'>
           <JCtrl />
-          {plots.map( (metric, idx) => (
-            <JPlot
-              key={idx+metric}
-              selectedPoint={selectedPoint}
-              onPointClick={ point => this.onPointClick(point) }
-              focusedPoint={focusedPoint}
-              metric={metric}
-              metricBounds={metricBounds[metric]}
-              delPlot={ () => delPlot(metric)}
-              chartData={chartData} />
-            ))
-          }
+          <div className='jp-ctrl__outer-container'>
+            <div className='jp__header'>
+              <h3>Title</h3>
+            </div>
+            <div className='jp-container'>
+              {plots.map( (metric, idx) => (
+                <JPlot
+                  key={idx+metric}
+                  selectedPoint={selectedPoint}
+                  onPointClick={ point => this.onPointClick(point) }
+                  focusedPoint={focusedPoint}
+                  metric={metric}
+                  metricBounds={metricBounds[metric]}
+                  delPlot={ () => delPlot(metric)}
+                  chartData={chartData} />
+                ))
+              }
+            </div>
+          </div>
         </div>
     );
   }
