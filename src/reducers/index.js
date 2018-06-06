@@ -8,7 +8,7 @@ export const initialState = {
   configOpen: false,
   userConfig: initialUserConfig,
   dataSet: initialDataSet,
-  __version: 1
+  __version: 2
 };
 
 export default (state=initialState, action) => {

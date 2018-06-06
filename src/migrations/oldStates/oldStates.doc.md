@@ -8,8 +8,8 @@ To test it, edit the `reHydrateStore` function in `src/index.js` to use an old s
 
 It should look something like:
 ```js
+import v0State from './migrations/oldStates/v0State';
 const reHydrateStore = () => {
-    import v0State from './migrations/oldStates/v0State';
     return migrate(v0State);
 };
 ```
