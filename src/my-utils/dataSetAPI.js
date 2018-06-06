@@ -1,29 +1,12 @@
-const saveData = (name, data) => {
-    let savedDataSets = window.localStorage.getItem('savedDataSets');
-    if (savedDataSets !== null) {
-        savedDataSets = JSON.parse(savedDataSets);
-        if (name in savedDataSets) {
-            // TODO alert overriding prev entry
-        }
-    } else {
-        savedDataSets = {};
-    }
-    savedDataSets[name] = true;
-    window.localStorage.setItem(
-        'savedDataSets',
-        JSON.stringify(savedDataSets)
-    );
+export const getData = name => JSON.parse(window.localStorage.getItem(name));
+
+export const saveData = (name, data) => {
     window.localStorage.setItem(
         name,
         JSON.stringify(data)
     );
 };
 
-const deleteDataSet = dataSet => {
+export const deleteDataSet = dataSet => {
     // TODO!
-};
-
-export default {
-    saveData,
-    deleteDataSet
 };

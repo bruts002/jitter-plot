@@ -15,6 +15,7 @@ import {
     delPlot,
     setMode,
     showConfig,
+    saveDataSet,
     setDataSet,
     deleteDataSet,
     selectPoint,
@@ -81,8 +82,10 @@ const renderAction = ({
     validMetrics,
     addPlot,
     deleteDataSet,
+    saveDataSet,
     setDataSet,
     data,
+    savedDataSets,
     metricBounds,
     updateMetricBounds,
     focusedPoint,
@@ -99,8 +102,10 @@ const renderAction = ({
                 addPlot={ metric => addPlot(metric) } />
         case USER_ACTIONS.VIEW_SAVED:
             return <SavedData
-                deleteDataSet={ dataSet => deleteDataSet(dataSet) }
-                setChartData={ newData => setDataSet(newData)} />
+                savedDataSets={ savedDataSets }
+                saveDataSet={ saveDataSet }
+                deleteDataSet={ deleteDataSet }
+                setChartData={ setDataSet} />
         case USER_ACTIONS.FILTER_DATA:
             return <FilterData
                 data={ data }
@@ -125,6 +130,7 @@ const mapStateToProps = ({
         selectedPoint,
         focusedPoint,
         metricBounds,
+        savedDataSets,
     },
     loading,
     userConfig,
@@ -133,6 +139,7 @@ const mapStateToProps = ({
     plots,
     validMetrics,
     metricBounds,
+    savedDataSets,
     data,
     selectedPoint,
     focusedPoint,
@@ -144,6 +151,7 @@ const mapDispatchToProps = dispatch => ({
     addPlot: metric => { dispatch(addPlot(metric)) },
     delPlot: metric => { dispatch(delPlot(metric))},
     setMode: mode => { dispatch(setMode(mode))},
+    saveDataSet: (name, data) => { dispatch(saveDataSet(name, data))},
     setDataSet: data => { dispatch(setDataSet(data))},
     showConfig: show => { dispatch(showConfig(show))},
     deleteDataSet: dataSet => { dispatch(deleteDataSet(dataSet))},

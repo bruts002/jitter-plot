@@ -1,70 +1,47 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import dataSetAPI from './my-utils/dataSetAPI';
+const isJSONFile = fileName => (
+    fileName &&
+    fileName.length >= 6 &&
+    fileName.slice(-5) === '.json');
 
-function isJSONFile(fileName) {
-    return (fileName &&
-        fileName !== '' &&
-        fileName.length >= 6 &&
-        fileName.slice(-5) === '.json');
-}
-
-function parseData(contents) {
-    var data = false;
+const parseData = contents => {
     try {
-        data = JSON.parse(contents);
+        return JSON.parse(contents);
     } catch (e) {
-        data = false;
+        return false;
     }
-    return data;
-}
+};
 
-class DataUploader extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.onChange = this.onChange.bind(this);
-    }
-
-    fileHandler(evt) {
-        var data = parseData(evt.target.result);
-        if (data === false) {
-            // TODO: handle bad data type
-        } else {
-            // save to localstorage
-            dataSetAPI.saveData(this.state.fileName, data);
-            this.props.setChartData(data);
-        }
-    }
-
-    onChange(evt) {
-        var fileName = evt.target.files[0].name,
-            reader;
-        if (isJSONFile(fileName)) {
-            this.setState({
-                fileName: fileName
+export default ({
+    saveDataSet,
+    setChartData,
+}) => <div>
+    <h3>Upload Data</h3>
+    <input
+        type='file'
+        multiple
+        onChange={ ({target: { files } }) => {
+            [].forEach.call(files, (file,idx) => {
+                const fileName = file.name;
+                const reader = new FileReader();
+                if (isJSONFile(fileName)) {
+                    reader.onload = ({target: { result }}) => {
+                        const data = parseData(result);
+                        if (data === false) {
+                            // TODO: handle bad data type
+                        } else {
+                            saveDataSet(fileName, data);
+                            if (idx === 0) {
+                                setChartData(fileName);
+                            }
+                        }
+                    };
+                    reader.readAsText(file);
+                } else {
+                    //TODO: handle bad file type
+                }
             });
-            reader = new FileReader();
-            reader.onload = evt => this.fileHandler(evt);
-            reader.readAsText(evt.target.files[0]);
-        } else {
-            //TODO: handle bad file type
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Upload Data</h3>
-                <input
-                    type="file"
-                    onChange={this.onChange}
-                    name="chartData" />
-            </div>
-        );
-    }
-}
-
-export default DataUploader;
-
+        }}
+        name="chartData" />
+</div>

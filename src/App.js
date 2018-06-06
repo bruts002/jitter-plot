@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import dataSetAPI from './my-utils/dataSetAPI';
+
 import JCtrl from './JCtrl';
 import JPlot from './JPlot';
 import { connect } from 'react-redux';
@@ -8,24 +8,38 @@ import {
   setDataSet,
   selectPoint,
   focusPoint,
+  saveDataSet,
 } from './reducers/actions';
 
 class App extends Component {
 
   componentDidMount() {
-    const _this = this;
-    const { saveData } = dataSetAPI;
-    fetch('./MOCK_DATA_2.json')
-      .then( data => data.json())
-      .then( resp => saveData('Random People 2', resp));
-    fetch('./MOCK_DATA_1.json')
-      .then( data => data.json())
-      .then( resp => {
-        saveData('Random People', resp);
-        if (_this.props.data.length === 0) {
-          _this.props.setDataSet(resp);
-        }
+    const {
+      // state
+      data: chartData,
+      savedDataSets,
+      // actions
+      saveDataSet,
+      setDataSet,
+    } = this.props;
+
+    const SAMPLE_SETS = [
+      './MOCK_DATA_1.json',
+      './MOCK_DATA_2.json'
+    ];
+    if (savedDataSets.length === 0) {
+      SAMPLE_SETS.forEach( (url, index) => {
+        fetch(url)
+          .then( raw => raw.json())
+          .then( data => {
+            const dataSetName = `Random People ${index+1}`;
+            saveDataSet(dataSetName, data)
+            if (index === 0 && chartData.length === 0) {
+              setDataSet(dataSetName);
+            }
+          });
       });
+    }
   }
 
   onPointClick(point) {
@@ -83,6 +97,7 @@ const mapStateToProps = ({
     plots,
     metricBounds,
     data,
+    savedDataSets,
     selectedPoint,
     focusedPoint,
   }
@@ -90,12 +105,14 @@ const mapStateToProps = ({
   plots,
   metricBounds,
   data,
+  savedDataSets,
   selectedPoint,
   focusedPoint,
 })
 
 const mapDispatchToProps = dispatch => ({
   delPlot: metric => { dispatch(delPlot(metric))},
+  saveDataSet: (name, data) => {dispatch(saveDataSet(name, data))},
   setDataSet: data => { dispatch(setDataSet(data))},
   selectPoint: point => { dispatch(selectPoint(point))},
   focusPoint: point => { dispatch(focusPoint(point))},

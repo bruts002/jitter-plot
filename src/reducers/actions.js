@@ -33,7 +33,15 @@ export const setMode = mode => ({
 export const showConfig = data => ({
     type: actions.SHOW_CONFIG,
     data
-})
+});
+
+export const saveDataSet = (name, data) => ({
+    type: actions.SAVE_DATA_SET,
+    data: {
+        name,
+        data
+    }
+});
 
 export const deleteDataSet = dataSet => ({
     type: actions.DEL_DATA_SET,
