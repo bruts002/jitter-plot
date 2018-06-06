@@ -36,7 +36,11 @@ const isolateDataSetData = ({
                 [...acc, key] :
                 [...acc];
         }, [])
-    const selectedDataSet = savedDataSets.length > 0 ? savedDataSets[0] : '';
+    const selectedDataSet = savedDataSets.length > 0 ?
+        savedDataSets[0] :
+        chartData.length > 0 ?
+            'Unknown Data Set' :
+            '';
     return {
         loading,
         mode,

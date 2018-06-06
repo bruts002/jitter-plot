@@ -59,6 +59,7 @@ class App extends Component {
   render() {
     const {
       selectedPoint,
+      selectedDataSet,
       plots,
       data,
       delPlot,
@@ -70,7 +71,7 @@ class App extends Component {
           <JCtrl />
           <div className='jp-ctrl__outer-container'>
             <div className='jp__header'>
-              <h3>Title</h3>
+              <h3>{selectedDataSet}</h3>
             </div>
             <div className='jp-container'>
               {plots.map( (metric, idx) => (
@@ -95,6 +96,7 @@ class App extends Component {
 const mapStateToProps = ({
   dataSet: {
     plots,
+    selectedDataSet,
     metricBounds,
     data,
     savedDataSets,
@@ -103,6 +105,7 @@ const mapStateToProps = ({
   }
 }) => ({
   plots,
+  selectedDataSet,
   metricBounds,
   data,
   savedDataSets,
