@@ -4,7 +4,8 @@ import {
 } from 'd3';
 import {
     getData,
-    saveData
+    saveData,
+    deleteData,
 } from '../my-utils/dataSetAPI';
 
 import actions from './actions';
@@ -40,7 +41,9 @@ export default (state=initialDataSet, action) => {
         // PLOT STUFF
         case actions.ADD_PLOT:
             return Object.assign({}, state, {
-                plots: [...state.plots, action.data]
+                plots: state.plots.indexOf(action.data) === -1 ?
+                    [...state.plots, action.data] :
+                    [...state.plots]
             });
         case actions.DEL_PLOT:
             return Object.assign({}, state, {
@@ -53,7 +56,10 @@ export default (state=initialDataSet, action) => {
                 savedDataSets: [...state.savedDataSets, action.data.name]
             });
         case actions.DEL_DATA_SET:
-            return state;
+            deleteData(action.data);
+            return Object.assign({}, state, {
+                savedDataSets: state.savedDataSets.filter( dataSet => dataSet !== action.data )
+            });
         case actions.SET_DATA_SET:
             const data = getData(action.data);
             const plots = Object

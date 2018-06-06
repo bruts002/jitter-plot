@@ -1,12 +1,12 @@
-export const getData = name => JSON.parse(window.localStorage.getItem(name));
+const storage = window.localStorage;
+
+export const getData = name => JSON.parse(storage.getItem(name));
 
 export const saveData = (name, data) => {
-    window.localStorage.setItem(
+    storage.setItem(
         name,
         JSON.stringify(data)
     );
 };
 
-export const deleteDataSet = dataSet => {
-    // TODO!
-};
+export const deleteData = name => storage.removeItem(name);
