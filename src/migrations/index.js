@@ -2,8 +2,8 @@ import { initialUserConfig } from '../reducers/userConfig';
 
 const migrate = store => {
     switch (store.__version) {
-        case 0: store = addUserConfig(store);
-        case 1: store = isolateDataSetData(store);
+        case 0: store = addUserConfig(store); /* falls through */
+        case 1: store = isolateDataSetData(store); /* falls through */
         default:
             return store;
     }
