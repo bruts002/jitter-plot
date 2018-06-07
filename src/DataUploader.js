@@ -1,15 +1,42 @@
 import React from 'react';
 
-const isJSONFile = fileName => (
-    fileName &&
-    fileName.length >= 6 &&
-    fileName.slice(-5) === '.json');
+import csvParser from './my-utils/csvParser';
 
-const parseData = contents => {
-    try {
-        return JSON.parse(contents);
-    } catch (e) {
-        return false;
+const VALID_TYPES = [{
+    extension: '.json',
+    types: ['application/json']
+},{
+    extension: '.csv',
+    types: ['text/csv', 'application/vnd.ms-excel']
+}];
+
+const isValidFileType = ({
+    name,
+    type
+}) => VALID_TYPES.some( ({
+    extension,
+    types
+}) =>
+    name.search(`${extension}$`) !== -1 && types.indexOf(type) !== -1
+);
+
+const parseData = (contents,type) => {
+    switch (type) {
+        case 'application/json':
+            try {
+                return JSON.parse(contents);
+            } catch (e) {
+                return false;
+            }
+        case 'text/csv':
+        case 'application/vnd.ms-excel':
+            try {
+                return csvParser(contents);
+            } catch (e) {
+                return false;
+            }
+        default:
+            return false;
     }
 };
 
@@ -25,9 +52,9 @@ export default ({
             [].forEach.call(files, (file,idx) => {
                 const fileName = file.name;
                 const reader = new FileReader();
-                if (isJSONFile(fileName)) {
+                if (isValidFileType(file)) {
                     reader.onload = ({target: { result }}) => {
-                        const data = parseData(result);
+                        const data = parseData(result, file.type);
                         if (data === false) {
                             // TODO: handle bad data type
                         } else {

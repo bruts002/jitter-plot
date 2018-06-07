@@ -64,7 +64,7 @@ export default (state=initialDataSet, action) => {
             const data = getData(action.data);
             const plots = Object
                 .keys(data[0])
-                .filter( key => !isNaN(+data[0][key]));
+                .filter( key => !isNaN(+data[0][key]) && data[0][key] !== '');
             return Object.assign({}, state, {
                 data,
                 selectedDataSet: action.data,
