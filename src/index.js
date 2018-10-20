@@ -13,6 +13,8 @@ import migrate from './migrations';
 // ◼ refactor css
 // ◼ make into easily reusable component
 // ◼ publish in npm
+// ◼ storybook
+// ◼ unit tests
 
 const localStorageMiddleWare = ({getState}) => {
     return next => action => {
