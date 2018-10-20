@@ -24,18 +24,18 @@ class App extends Component {
     } = this.props;
 
     const SAMPLE_SETS = [
-      './MOCK_DATA_1.json',
-      './MOCK_DATA_2.json'
+      { name: 'Random People 1', src: './MOCK_DATA_1.json' },
+      { name: 'Random People 2', src: './MOCK_DATA_2.json' },
+      { name: 'Chicago Gas Stations', src: 'https://data.cityofchicago.org/resource/f7f2-ggz5.json?$limit=100&$offset=100' },
     ];
     if (savedDataSets.length === 0) {
-      SAMPLE_SETS.forEach( (url, index) => {
-        fetch(url)
+      SAMPLE_SETS.forEach( (dataSet, index) => {
+        fetch(dataSet.src)
           .then( raw => raw.json())
           .then( data => {
-            const dataSetName = `Random People ${index+1}`;
-            saveDataSet(dataSetName, data)
+            saveDataSet(dataSet.name, data)
             if (index === 0 && chartData.length === 0) {
-              setDataSet(dataSetName);
+              setDataSet(dataSet.name);
             }
           });
       });
