@@ -8,19 +8,15 @@ const style = {
   borderColor: 'gray'
 };
 
-const PointViewer = props => {
-  const keys = Object.keys(props.selectedPoint);
+const PointViewer = ({ selectedPoint }) => {
+  const keys = Object.keys(selectedPoint);
   return (
-    <div
-      className='pointCard'
-      style={style}>
-        { keys.map( key => {
-          return <div key={key}>
-            {key}: {props.selectedPoint[key]}
-          </div>
-        })}
+    <div className='pointCard' style={style}>
+      {keys.map(key => (
+        <div key={key}>{`${key}: ${selectedPoint[key]}`}</div>
+      ))}
     </div>
   );
-}
+};
 
 export default PointViewer;
