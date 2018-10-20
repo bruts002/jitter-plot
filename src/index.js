@@ -9,11 +9,10 @@ import registerServiceWorker from './registerServiceWorker';
 import migrate from './migrations';
 
 // TODO:
-// 1. Move away from redux to Provider/Consumer
-// 2. Add theme provider
-// 3. refactor css
-// 4. make into easily reusable component
-// 5. publish in npm
+// ◼ Add theme provider
+// ◼ refactor css
+// ◼ make into easily reusable component
+// ◼ publish in npm
 
 const localStorageMiddleWare = ({getState}) => {
     return next => action => {
