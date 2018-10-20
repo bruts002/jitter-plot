@@ -12,6 +12,7 @@ export const initialState = {
 };
 
 export default (state=initialState, action) => {
+  console.log(actions);
   switch (action.type) {
     case actions.SET_MODE:
       return Object.assign({}, state, {
@@ -32,6 +33,8 @@ export default (state=initialState, action) => {
     case actions.SAVE_DATA_SET:
     case actions.SET_DATA_SET:
     case actions.DEL_DATA_SET:
+    case actions.DEL_PLOT:
+    case actions.ADD_PLOT:
       return Object.assign({}, state, {
         dataSet: dataSetReducer(state.dataSet, action)
       });
