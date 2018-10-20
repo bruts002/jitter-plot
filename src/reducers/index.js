@@ -12,7 +12,6 @@ export const initialState = {
 };
 
 export default (state=initialState, action) => {
-  console.log(actions);
   switch (action.type) {
     case actions.SET_MODE:
       return Object.assign({}, state, {
