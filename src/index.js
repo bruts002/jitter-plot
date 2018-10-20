@@ -15,6 +15,7 @@ import migrate from './migrations';
 // ◼ publish in npm
 // ◼ storybook
 // ◼ unit tests
+// ◼ eslint/prettier js on save
 
 const localStorageMiddleWare = ({getState}) => {
     return next => action => {
