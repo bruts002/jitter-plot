@@ -186,7 +186,10 @@ JitterPlot.propTypes = {
   data: PropTypes.array,
   metric: PropTypes.string,
   selectedPoint: PropTypes.shape({
-    id: PropTypes.number
+    id: PropTypes.oneOfType([ 
+      PropTypes.string,
+      PropTypes.number
+    ])
   }),
   metricBounds: PropTypes.shape({
     upperBound: PropTypes.number,
