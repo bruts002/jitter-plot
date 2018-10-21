@@ -8,6 +8,7 @@ import SavedData from './SavedData';
 import FilterData from './FilterData';
 import PlotAdder from './PlotAdder';
 import ActionSelector, { USER_ACTIONS } from './ActionSelector';
+import './j-ctrl.scss';
 
 import { connect } from 'react-redux';
 import {
