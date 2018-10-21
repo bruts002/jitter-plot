@@ -1,8 +1,0 @@
-.view-selector {
-    padding: 5px;
-    cursor: pointer;
-}
-
-.view-selector.active {
-    color: #ffee10;
-}
