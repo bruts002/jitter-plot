@@ -9,7 +9,8 @@ export const initialUserConfig = {
 export default (state=initialUserConfig, action) => {
     switch (action.type) {
         case actions.PRIMARY_COLOR_CHANGE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 colors: {
                     ...state.colors,
                     primary: {
@@ -17,9 +18,10 @@ export default (state=initialUserConfig, action) => {
                         default: state.colors.primary.default,
                     }
                 }
-            });
+            };
         case actions.UPDATE_PRIMARY_COLOR_DEFAULT:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 colors: {
                     ...state.colors,
                     primary: {
@@ -27,7 +29,7 @@ export default (state=initialUserConfig, action) => {
                         default: action.data
                     }
                 }
-            })
+            };
         default:
             return state;
     }

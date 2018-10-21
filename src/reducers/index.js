@@ -12,20 +12,24 @@ export const initialState = {
 };
 
 export default (state=initialState, action) => {
+  const { data } = action;
   switch (action.type) {
     case actions.SET_MODE:
-      return Object.assign({}, state, {
-        mode: action.data
-      });
+      return {
+        ...state,
+        mode: data
+      };
     case actions.SHOW_CONFIG:
-      return Object.assign({}, state, {
-        configOpen: action.data
-      })
+      return {
+        ...state,
+        configOpen: data
+      }
     case actions.PRIMARY_COLOR_CHANGE:
     case actions.UPDATE_PRIMARY_COLOR_DEFAULT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         userConfig: userConfigReducer(state.userConfig, action)
-      });
+      };
     case actions.UPDATE_METRIC_BOUNDS:
     case actions.SELECT_POINT:
     case actions.FOCUS_POINT:
@@ -34,9 +38,10 @@ export default (state=initialState, action) => {
     case actions.DEL_DATA_SET:
     case actions.DEL_PLOT:
     case actions.ADD_PLOT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         dataSet: dataSetReducer(state.dataSet, action)
-      });
+      };
     default:
       return state;
   }
