@@ -5,40 +5,38 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-}
-
-.jp-ctrl__header {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-}
-
-.jp-ctrl__config {
-    position: relative;
-    top: -760px;
-    width: 300px;
-    flex-basis: 0px;
-    height: 0px;
-    transition: 0.5s;
-    display: flex;
-    flex-direction: column;
-}
-
-.jp-ctrl__config--show {
-    top: 0;
-    flex: 1 0 760px;
-}
-
-.jp-ctrl__config-option {
-    display: flex;
-    align-items: center;
-}
-
-.jp-ctrl hr {
-    width: 100%;
-}
-
-.jp-ctrl,
-.jp-ctrl label {
     padding: 10px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+    }
+    &__config {
+        position: relative;
+        top: -760px;
+        width: 300px;
+        flex-basis: 0;
+        height: 0;
+        transition: 0.5s;
+        display: flex;
+        flex-direction: column;
+        &--show {
+            top: 0;
+            flex: 1 0 760px;
+        }
+    }
+
+    &__config-option {
+        display: flex;
+        align-items: center;
+    }
+
+    hr {
+        width: 100%;
+    }
+
+    label {
+        padding: 10px;
+    }
 }
