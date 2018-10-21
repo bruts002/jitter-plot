@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "d3": "^4.13.0",
-    "react": "^16.0.2",
+    "react": "16.5.2",
     "react-dom": "^16.0.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2"
@@ -28,5 +28,11 @@
     "deploy": "gh-pages -d build",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
