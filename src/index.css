@@ -49,10 +49,6 @@ tr.focused {
   stroke: gray;
 }
 
-.saved-data-set {
-  cursor: pointer;
-}
-
 .actionSelector {
     margin-top: auto;
     padding: 10px;

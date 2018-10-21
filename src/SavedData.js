@@ -1,5 +1,6 @@
 import React from 'react';
 import DataUploader from './DataUploader';
+import './savedData.scss';
 
 export default ({
     // state
@@ -12,9 +13,9 @@ export default ({
     <h3>Saved Data</h3>
     <ul>
     {savedDataSets.map( savedData => (
-        <li key={savedData}>
+        <li className="saved-data-set" key={savedData}>
             <span
-                className="saved-data-set"
+                className="saved-data-set__title"
                 onClick={ () => setChartData(savedData) } >
                 {savedData}
             </span>

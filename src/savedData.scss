@@ -1,0 +1,9 @@
+.saved-data-set {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 8px;
+  
+  &__title {
+    cursor: pointer;
+  }
+}
