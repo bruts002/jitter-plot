@@ -1,0 +1,61 @@
+$chunk-border: #814141;
+$selected-color: #ffee10;
+$border-radius: 5px;
+
+.range {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    &__inputs {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+    &__slider {
+        display: flex;
+        box-sizing: border-box;
+        height: 10px;
+        flex-shrink: 0;
+        flex-grow: 0;
+    }
+
+    &__chunk {
+        flex-shrink: 0;
+        flex-grow: 0;
+        box-sizing: border-box;
+        background-color: lightgray;
+        border: $chunk-border 1px solid;
+
+        &--start {
+            border-right: none;
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+        }
+
+        &--middle {
+            background-color: $selected-color;
+            border-right: none;
+            border-left: none;
+        }
+
+        &--end {
+            border-left: none;
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+        }
+    }
+
+    &__control {
+        flex-shrink: 0;
+        flex-grow: 0;
+        box-sizing: border-box;
+        border: $chunk-border 2px solid;
+        border-radius: $border-radius;
+        background-color: $selected-color;
+        position: relative;
+        top: -5px;
+        height: 20px;
+    }
+}
