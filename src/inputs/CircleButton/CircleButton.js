@@ -1,4 +1,5 @@
 import React from 'react';
+import './circleButton.scss';
 
 export default ({
     onClick,

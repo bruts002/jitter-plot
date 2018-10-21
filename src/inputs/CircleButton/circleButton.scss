@@ -1,0 +1,61 @@
+$focus-color: #4d90fe;
+$selected-color: #ffee10;
+$border-radius: 50%;
+$button-size: 40px;
+$hover-transition: 0.5s;
+
+
+.circle-button {
+    box-sizing: border-box;
+    margin: 0 14px;
+    display: inline-flex;
+    border-radius: $border-radius;
+
+    &:focus {
+        outline: none;
+        border: $focus-color solid 2px;
+        span {
+            transition: 0s;
+            color: $focus-color;
+        }
+    }
+
+    span {
+        position: relative;
+        display: block;
+        width: $button-size;
+        height: $button-size;
+        line-height: $button-size;
+        text-align: center;
+        background: #333;
+        border-radius: $border-radius;
+        font-size: 24px;
+        color: #666;
+        transition: $hover-transition;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: $border-radius;
+            background: $selected-color;
+            transition: $hover-transition;
+            transform: scale(0.9);
+            z-index: -1;
+        }
+        &.active::before,
+        &:hover::before {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px $selected-color;
+        }
+        &.active,
+        &:hover {
+            color: $selected-color;
+            box-shadow: 0 0 5px $selected-color;
+            text-shadow: 0 0 5px $selected-color;
+            cursor: pointer;
+        }
+    }
+}
