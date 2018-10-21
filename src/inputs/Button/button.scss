@@ -1,0 +1,62 @@
+$button-width: 80px;
+$button-height: 50px;
+$extension: -2px;
+$border-color: #ffee10;
+
+.button {
+    border: none;
+    position: absolute;
+    display: inline-flex;
+    cursor: pointer;
+    width: $button-width;
+    height: $button-height;
+    margin: 5px;
+    background: #262626;
+    text-transform: uppercase;
+    justify-content: center;
+    line-height: $button-height;
+    color: $border-color;
+    font-size: 20px;
+
+    &::before,
+    &::after,
+    span::before,
+    span::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: $border-color;
+        transition: 0.3s;
+        mix-blend-mode: hue;
+    }
+
+    span::before {
+        top: $extension;
+        left: $extension;
+    }
+
+    span::after {
+        top: $extension;
+        right: $extension;
+    }
+
+    &::before {
+        bottom: $extension;
+        left: $extension;
+    }
+
+    &::after {
+        bottom: $extension;
+        right: $extension;
+    }
+
+    &:hover::before,
+    &:hover::after,
+    &:hover span::before,
+    &:hover span::after {
+        width: calc( #{$button-width} / 2);
+        height: calc( #{$button-height} / 2);
+    }
+
+}
