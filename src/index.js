@@ -14,6 +14,7 @@ import migrate from './migrations';
 // ◼ make into easily reusable component
 // ◼ publish in npm
 // ◼ storybook
+// ◼ publish storybook
 // ◼ unit tests
 // ◼ eslint/prettier js on save
 
