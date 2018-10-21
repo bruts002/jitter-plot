@@ -9,6 +9,7 @@ import {
   scaleTime as d3ScaleTime,
   axisRight as d3AxisRight,
 } from 'd3';
+import './j-plot.scss';
 
 const config = {
   radius: 10,
