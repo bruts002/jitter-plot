@@ -1,0 +1,15 @@
+.icon-button {
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  float: right;
+  display: block;
+  text-align: center;
+  transition: 0.5s;
+  &:hover {
+    color: rgb(255, 65, 16);
+    background: white;
+  }
+}

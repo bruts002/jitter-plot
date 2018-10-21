@@ -1,5 +1,6 @@
 import React from 'react';
 import DataUploader from './DataUploader';
+import IconButton from './inputs/IconButton/IconButton';
 import './savedData.scss';
 
 export default ({
@@ -14,17 +15,14 @@ export default ({
     <ul>
     {savedDataSets.map( savedData => (
         <li className="saved-data-set" key={savedData}>
+            {/* TODO: radio inputs here, with htmlFor props on span(which should be label) */}
             <span
                 className="saved-data-set__title"
                 onClick={ () => setChartData(savedData) } >
                 {savedData}
             </span>
-            <span
-                className="deleteIcon"
-                onClick={ () => deleteDataSet(savedData) }>
-                <i
-                    className="fa fa-times-circle"
-                    aria-hidden="true"></i>
+            <span onClick={ () => deleteDataSet(savedData) }>
+                <IconButton icon='times-circle' />
             </span>
         </li>
     ))}

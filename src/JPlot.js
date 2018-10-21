@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Axis from './my-utils/Axis';
+import IconButton from './inputs/IconButton/IconButton';
 import Point from './Point';
 import {
   max as d3Max,
@@ -98,12 +99,8 @@ class JitterPlot extends Component {
     } = this.props;
     return (
       <div className='j-plot__text'>
-        <span
-          className="deleteIcon"
-          onClick={ delPlot }>
-          <i
-            className="fa fa-times-circle"
-            aria-hidden="true"></i>
+        <span onClick={ delPlot }>
+          <IconButton size='24' icon='times-circle' />
         </span>
         <h2>{data.length ? metric : 'No Data'}</h2>
       </div>
