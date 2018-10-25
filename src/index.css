@@ -11,11 +11,6 @@ body {
   flex-flow: row-reverse nowrap;
 }
 
-.jp-ctrl__outer-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .jp__header {
   display: flex;
   justify-content: center;
