@@ -157,6 +157,7 @@ class JitterPlot extends Component {
             isSelectedPoint={this.isSelectedPoint(person)}
             isOutOfRange={metricBounds.lowerBound > person[metric] || metricBounds.upperBound < person[metric]}
             onPointClick={ () => onPointClick(person) }
+            plotWidth={config.width}
             data={person} />)
           }
         </g>

@@ -31,10 +31,15 @@ class Point extends Component {
   }
 
   randX() {
-    if (this.props.isSelectedPoint) {
+    const {
+      isSelectedPoint,
+      radius,
+      plotWidth
+    } = this.props;
+    if (isSelectedPoint) {
       return 150;
     } else {
-      return Math.floor(Math.random() * (300-this.props.radius/2)) + this.props.radius/2;
+      return Math.floor(Math.random() * (plotWidth-radius/2)) + radius/2;
     }
   }
 
