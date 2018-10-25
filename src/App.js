@@ -66,6 +66,7 @@ class App extends Component {
       delPlot,
       metricBounds,
       focusedPoint,
+      userConfig
     } = this.props;
     return (
         <div className='app-container'>
@@ -75,6 +76,7 @@ class App extends Component {
             <div className='app-container'>
               {plots.map( (metric, idx) => (
                 <JPlot
+                  userConfig={userConfig}
                   key={idx+metric}
                   selectedPoint={selectedPoint}
                   onPointClick={ point => this.onPointClick(point) }
@@ -101,7 +103,8 @@ const mapStateToProps = ({
     savedDataSets,
     selectedPoint,
     focusedPoint,
-  }
+  },
+  userConfig
 }) => ({
   plots,
   selectedDataSet,
@@ -110,6 +113,7 @@ const mapStateToProps = ({
   savedDataSets,
   selectedPoint,
   focusedPoint,
+  userConfig
 })
 
 const mapDispatchToProps = dispatch => ({

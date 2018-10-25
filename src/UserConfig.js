@@ -3,16 +3,14 @@ import Button from './inputs/Button/Button';
 import { connect } from 'react-redux';
 import {
     showConfig,
-    changePrimaryColor,
-    updatePrimaryColorDefault
+    changePrimaryColor
 } from './reducers/actions';
 
 const UserConfig = ({
     configOpen,
     showConfig,
     changePrimaryColor,
-    userConfig,
-    updatePrimaryColorDefault
+    userConfig
 }) => <div
     className={`jp-ctrl__config ${configOpen ? 'jp-ctrl__config--show' : ''}`}>
     <h2>Config</h2>
@@ -20,12 +18,6 @@ const UserConfig = ({
     <h3>Colors</h3>
 
     <div className='jp-ctrl__config-option'>
-        <input
-            type='checkbox'
-            name='primaryColorDefault'
-            value={userConfig.colors.primary.default}
-            onChange={ ({target: {checked}}) => updatePrimaryColorDefault(checked)}
-            />
         <label htmlFor='primaryColor'>Primary</label>
         <input
             type='text'
@@ -55,7 +47,6 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => ({
     showConfig: show => { dispatch(showConfig(show)) },
     changePrimaryColor: color => { dispatch(changePrimaryColor(color)) },
-    updatePrimaryColorDefault: value => { dispatch(updatePrimaryColorDefault(value)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserConfig);
