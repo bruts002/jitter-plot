@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+.app-container {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+
+  &__jp-holder {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 calc(100% - #{$ctrl-width});
+  }
+
+  &__jp-title {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+}

@@ -1,4 +1,4 @@
-$ctrl-width: 322px;
+@import './variables.scss';
 
 .jp-ctrl {
     width: $ctrl-width;
@@ -9,12 +9,6 @@ $ctrl-width: 322px;
     flex-direction: column;
     overflow: hidden;
     padding: 10px;
-
-    &__outer-container {
-        display: flex;
-        flex-direction: column;
-        flex: 0 0 calc(100% - #{$ctrl-width});
-    }
 
     &__header {
         display: flex;

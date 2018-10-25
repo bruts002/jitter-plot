@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import JCtrl from './JCtrl';
 import JPlot from './JPlot';
+import './App.scss';
 import { connect } from 'react-redux';
 import {
   delPlot,
@@ -67,13 +68,11 @@ class App extends Component {
       focusedPoint,
     } = this.props;
     return (
-        <div className='jp-container'>
+        <div className='app-container'>
           <JCtrl />
-          <div className='jp-ctrl__outer-container'>
-            <div className='jp__header'>
-              <h3>{selectedDataSet}</h3>
-            </div>
-            <div className='jp-container'>
+          <div className='app-container__jp-holder'>
+            <h3 className='app-container__jp-title'>{selectedDataSet}</h3>
+            <div className='app-container'>
               {plots.map( (metric, idx) => (
                 <JPlot
                   key={idx+metric}

@@ -6,17 +6,6 @@ body {
   color: #A7A7A7;
 }
 
-.jp-container {
-  display: flex;
-  flex-flow: row-reverse nowrap;
-}
-
-.jp__header {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
 .pointCard:hover {
   cursor: pointer;
 }
