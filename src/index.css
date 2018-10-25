@@ -6,10 +6,6 @@ body {
   color: #A7A7A7;
 }
 
-.pointCard:hover {
-  cursor: pointer;
-}
-
 thead td {
   font-weight: bold;
 }

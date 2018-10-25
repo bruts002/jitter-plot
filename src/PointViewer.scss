@@ -1,0 +1,11 @@
+.point-card {
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  border-color: gray;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

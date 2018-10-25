@@ -1,17 +1,10 @@
 import React from 'react';
-
-const style = {
-  border: '2px solid gray',
-  borderRadius: '5px',
-  padding: '5px',
-  margin: '5px',
-  borderColor: 'gray'
-};
+import './PointViewer.scss';
 
 const PointViewer = ({ selectedPoint }) => {
   const keys = Object.keys(selectedPoint);
   return (
-    <div className='pointCard' style={style}>
+    <div className='point-card'>
       {keys.map(key => (
         <div key={key}>{`${key}: ${selectedPoint[key]}`}</div>
       ))}
