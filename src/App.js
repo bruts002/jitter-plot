@@ -87,6 +87,7 @@ class App extends Component {
                   data={data} />
                 ))
               }
+              {!plots.length && <h4 className='app-container__no-plots'>Add some plots!</h4>}
             </div>
           </div>
         </div>

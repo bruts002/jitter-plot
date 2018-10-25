@@ -15,4 +15,10 @@
     justify-content: center;
     align-content: center;
   }
+
+  &__no-plots {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+  }
 }
