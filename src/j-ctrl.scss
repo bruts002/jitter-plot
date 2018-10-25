@@ -1,5 +1,8 @@
+$ctrl-width: 322px;
+
 .jp-ctrl {
-    width: 300px;
+    width: $ctrl-width;
+    box-sizing: border-box;
     height: 750px;
     border: 1px solid gray;
     display: flex;
@@ -10,6 +13,7 @@
     &__outer-container {
         display: flex;
         flex-direction: column;
+        flex: 0 0 calc(100% - #{$ctrl-width});
     }
 
     &__header {
