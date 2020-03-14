@@ -16,6 +16,10 @@
     align-items: center;
   }
 
+  &__body {
+    overflow: scroll;
+  }
+
   hr {
     width: 100%;
   }

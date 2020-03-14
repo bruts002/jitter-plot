@@ -26,7 +26,9 @@ function JCtrl(props) {
     <div className='jp-ctrl'>
       <Header {...props} />
       <hr />
-      <Action {...props} mode={mode} />
+      <div className='jp-ctrl__body'>
+        <Action {...props} mode={mode} />
+      </div>
       <ActionSelector action={mode} setAction={setMode} />
     </div>
   )
