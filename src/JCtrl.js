@@ -66,6 +66,7 @@ function Action({
   mode,
   validMetrics,
   addPlot,
+  delPlot,
   deleteDataSet,
   saveDataSet,
   setDataSet,
@@ -80,12 +81,15 @@ function Action({
   if (loading) {
     return <Loading />
   }
+
   switch (mode) {
     case USER_ACTIONS.ADD_PLOT:
       return (
         <PlotAdder
-          validMetrics={validMetrics}
-          addPlot={metric => addPlot(metric)}
+          metrics={validMetrics}
+          selectedMetrics={plots}
+          addPlot={addPlot}
+          delPlot={delPlot}
         />
       )
     case USER_ACTIONS.VIEW_SAVED:

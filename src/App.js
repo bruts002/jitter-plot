@@ -5,7 +5,6 @@ import JPlot from "./JPlot"
 import "./App.scss"
 import { connect } from "react-redux"
 import {
-  delPlot,
   setDataSet,
   selectPoint,
   focusPoint,
@@ -66,7 +65,6 @@ class App extends Component {
       selectedDataSet,
       plots,
       data,
-      delPlot,
       metricBounds,
       focusedPoint,
       userConfig
@@ -85,7 +83,6 @@ class App extends Component {
               focusedPoint={focusedPoint}
               metric={metric}
               metricBounds={metricBounds[metric]}
-              delPlot={() => delPlot(metric)}
               data={data}
             />
           ))}
@@ -121,9 +118,6 @@ const mapStateToProps = ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  delPlot: metric => {
-    dispatch(delPlot(metric))
-  },
   saveDataSet: (name, data) => {
     dispatch(saveDataSet(name, data))
   },
