@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/jitter-plot/precache-manifest.a2a40699021905eb7a2c799e72b272a6.js"
+  "/jitter-plot/precache-manifest.7d3c59f899094402f48ff48b02a50a76.js"
 );
 
 self.addEventListener('message', (event) => {
