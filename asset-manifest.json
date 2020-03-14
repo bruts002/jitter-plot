@@ -1,6 +1,22 @@
 {
-  "main.css": "static/css/main.fb1b99d9.css",
-  "main.css.map": "static/css/main.fb1b99d9.css.map",
-  "main.js": "static/js/main.349cd442.js",
-  "main.js.map": "static/js/main.349cd442.js.map"
+  "files": {
+    "main.css": "/jitter-plot/static/css/main.1860d49f.chunk.css",
+    "main.js": "/jitter-plot/static/js/main.07c30c3b.chunk.js",
+    "main.js.map": "/jitter-plot/static/js/main.07c30c3b.chunk.js.map",
+    "runtime-main.js": "/jitter-plot/static/js/runtime-main.890226af.js",
+    "runtime-main.js.map": "/jitter-plot/static/js/runtime-main.890226af.js.map",
+    "static/js/2.1a011119.chunk.js": "/jitter-plot/static/js/2.1a011119.chunk.js",
+    "static/js/2.1a011119.chunk.js.map": "/jitter-plot/static/js/2.1a011119.chunk.js.map",
+    "index.html": "/jitter-plot/index.html",
+    "precache-manifest.a2a40699021905eb7a2c799e72b272a6.js": "/jitter-plot/precache-manifest.a2a40699021905eb7a2c799e72b272a6.js",
+    "service-worker.js": "/jitter-plot/service-worker.js",
+    "static/css/main.1860d49f.chunk.css.map": "/jitter-plot/static/css/main.1860d49f.chunk.css.map",
+    "static/js/2.1a011119.chunk.js.LICENSE.txt": "/jitter-plot/static/js/2.1a011119.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.890226af.js",
+    "static/js/2.1a011119.chunk.js",
+    "static/css/main.1860d49f.chunk.css",
+    "static/js/main.07c30c3b.chunk.js"
+  ]
 }
