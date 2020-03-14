@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   onPointClick(point) {
-    if (point.id === this.props.selectedPoint.id) {
+    if (point.id === this.props.selectedPoint && this.props.selectedPoint.id) {
       this.drillIntoPoint(point)
     } else if (point.id === this.props.focusedPoint.id) {
       this.props.selectPoint(point)

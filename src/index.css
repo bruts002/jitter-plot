@@ -2,8 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 20px;
   background: #262626;
-  color: #A7A7A7;
+  color: #a7a7a7;
 }
 
 thead td {
@@ -30,7 +31,7 @@ tr.focused {
 }
 
 .actionSelector {
-    margin-top: auto;
-    padding: 10px;
-    background: #262626;
+  margin-top: auto;
+  padding: 10px;
+  background: #262626;
 }
