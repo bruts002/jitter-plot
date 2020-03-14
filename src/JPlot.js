@@ -109,8 +109,7 @@ class JitterPlot extends Component {
       data,
       metricBounds,
       focusedPoint,
-      onPointClick,
-      userConfig
+      onPointClick
     } = this.props
     const { max, min, yScale } = this.state
 
@@ -130,17 +129,12 @@ class JitterPlot extends Component {
 
     const yAxis = d3AxisRight(yScale).tickValues(tickValues)
 
-    const colors = {
-      selected: userConfig.colors.primary
-    }
-
     return data.length ? (
       <svg width={config.width} height={config.height} style={config.svgStyle}>
         <g>
           <Axis height={config.height - config.margin.top} axis={yAxis} />
           {data.map(person => (
             <Point
-              colors={colors}
               key={person.id}
               cy={this.getY(Math.round(person[metric]))}
               radius={config.radius}

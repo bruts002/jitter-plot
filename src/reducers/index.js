@@ -1,35 +1,15 @@
-import actions from './actions';
-import userConfigReducer, { initialUserConfig } from './userConfig';
-import dataSetReducer, { initialDataSet } from './dataSet';
+import actions from "./actions"
+import dataSetReducer, { initialDataSet } from "./dataSet"
 
 export const initialState = {
   loading: false,
-  mode: 'viewDetails',
   configOpen: false,
-  userConfig: initialUserConfig,
   dataSet: initialDataSet,
   __version: 2
-};
+}
 
-export default (state=initialState, action) => {
-  const { data } = action;
+export default (state = initialState, action) => {
   switch (action.type) {
-    case actions.SET_MODE:
-      return {
-        ...state,
-        mode: data
-      };
-    case actions.SHOW_CONFIG:
-      return {
-        ...state,
-        configOpen: data
-      }
-    case actions.PRIMARY_COLOR_CHANGE:
-    case actions.UPDATE_PRIMARY_COLOR_DEFAULT:
-      return {
-        ...state,
-        userConfig: userConfigReducer(state.userConfig, action)
-      };
     case actions.UPDATE_METRIC_BOUNDS:
     case actions.SELECT_POINT:
     case actions.FOCUS_POINT:
@@ -41,8 +21,8 @@ export default (state=initialState, action) => {
       return {
         ...state,
         dataSet: dataSetReducer(state.dataSet, action)
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}

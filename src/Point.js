@@ -1,45 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
 
 class Point extends Component {
-
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isHover: false,
       cx: this.randX()
-    };
-
+    }
   }
 
   getOpacity() {
-    let opacity;
+    let opacity
     if (this.props.isFocusedPoint || (this.state && this.state.isHover)) {
-      opacity = 1;
+      opacity = 1
     } else if (this.props.isSelectedPoint) {
-      opacity = 0.8;
+      opacity = 0.8
     } else {
-      opacity = 0.6;
+      opacity = 0.6
     }
-    return opacity;
+    return opacity
   }
 
   hoverMenu(isHover) {
     this.setState({
       isHover
-    });
+    })
   }
 
   randX() {
-    const {
-      isSelectedPoint,
-      radius,
-      plotWidth
-    } = this.props;
+    const { isSelectedPoint, radius, plotWidth } = this.props
     if (isSelectedPoint) {
-      return 150;
+      return 150
     } else {
-      return Math.floor(Math.random() * (plotWidth-radius/2)) + radius/2;
+      return Math.floor(Math.random() * (plotWidth - radius / 2)) + radius / 2
     }
   }
 
@@ -48,40 +42,42 @@ class Point extends Component {
       isOutOfRange,
       isSelectedPoint,
       colors: {
-        selected = '#db4437',
-        selectedDisabled = '#d5dc7e',
-        enabled = '#4285f4',
-        disabled = 'lightgray'
+        selected = "#ffee10",
+        selectedDisabled = "#d5dc7e",
+        enabled = "#4285f4",
+        disabled = "lightgray"
       } = {}
-    } = this.props;
+    } = this.props
 
     if (isOutOfRange) {
       if (isSelectedPoint) {
-        return selectedDisabled;
+        return selectedDisabled
       } else {
-        return disabled;
+        return disabled
       }
     } else {
       if (isSelectedPoint) {
-        return selected;
+        return selected
       } else {
-        return enabled;
+        return enabled
       }
     }
   }
 
   getStroke() {
-    let stroke;
+    let stroke
     if (this.props.isFocusedPoint) {
-      stroke = "white";
+      stroke = "white"
     } else if (this.state.isHover) {
-      stroke = "black";
+      stroke = "black"
     }
-    return stroke;
+    return stroke
   }
 
   getStrokeWidth() {
-    if (this.props.isFocusedPoint || this.state.isHover) { return 1; }
+    if (this.props.isFocusedPoint || this.state.isHover) {
+      return 1
+    }
   }
 
   render() {
@@ -94,12 +90,13 @@ class Point extends Component {
         fillOpacity={this.getOpacity()}
         stroke={this.getStroke()}
         strokeWidth={this.getStrokeWidth()}
-        onMouseEnter={ e => this.hoverMenu(true)}
-        onMouseLeave={ e => this.hoverMenu(false)}
-        onClick={ () => this.props.onPointClick() }
-        fill={this.getFill()} />
-    );
+        onMouseEnter={e => this.hoverMenu(true)}
+        onMouseLeave={e => this.hoverMenu(false)}
+        onClick={() => this.props.onPointClick()}
+        fill={this.getFill()}
+      />
+    )
   }
 }
 
-export default Point;
+export default Point
