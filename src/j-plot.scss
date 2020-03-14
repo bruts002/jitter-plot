@@ -1,12 +1,14 @@
 .j-plot {
-    display: flex;
-    flex-direction: column;
-    border:1px solid gray;
-    hr {
-        width: 100%;
-    }
-    &__text {
-        padding: 10px;
-        text-align: center;
-    }
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  text-align: center;
+
+  &__header {
+    flex-basis: 25px;
+  }
+
+  &__footer {
+    flex: 0 0 100px;
+  }
 }

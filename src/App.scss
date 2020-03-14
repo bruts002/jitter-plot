@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 .app-container {
   display: flex;
@@ -6,14 +6,20 @@
 
   &__jp-holder {
     display: flex;
-    flex-direction: column;
+    flex-flow: row-reverse wrap;
     flex: 0 0 calc(100% - #{$ctrl-width});
+    justify-content: flex-start;
+    align-content: flex-start;
   }
 
   &__jp-title {
     display: flex;
+    flex-basis: 100%;
     justify-content: center;
     align-content: center;
+    margin: 15px 0;
+    font-size: 20px;
+    height: 30px;
   }
 
   &__no-plots {

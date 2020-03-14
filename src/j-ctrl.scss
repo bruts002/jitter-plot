@@ -1,45 +1,26 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 .jp-ctrl {
-    width: $ctrl-width;
-    box-sizing: border-box;
-    height: 750px;
-    border: 1px solid gray;
+  width: $ctrl-width;
+  box-sizing: border-box;
+  height: 100vh;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px;
+
+  &__header {
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  hr {
+    width: 100%;
+  }
+
+  label {
     padding: 10px;
-
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-content: center;
-    }
-    &__config {
-        position: relative;
-        top: -760px;
-        width: 300px;
-        flex-basis: 0;
-        height: 0;
-        transition: 0.5s;
-        display: flex;
-        flex-direction: column;
-        &--show {
-            top: 0;
-            flex: 1 0 760px;
-        }
-    }
-
-    &__config-option {
-        display: flex;
-        align-items: center;
-    }
-
-    hr {
-        width: 100%;
-    }
-
-    label {
-        padding: 10px;
-    }
+  }
 }
