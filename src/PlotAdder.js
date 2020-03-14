@@ -17,9 +17,9 @@ export default function PlotAdder({
   return (
     <>
       <h3>Metrics</h3>
-      <ul>
+      <ul style={{ listStyle: "none", paddingLeft: 0 }}>
         {metrics.map(metric => (
-          <li key={metric}>
+          <li key={metric} style={{ padding: 10 }}>
             <input
               type='checkbox'
               name={makeId(metric)}

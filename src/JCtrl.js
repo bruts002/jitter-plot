@@ -12,7 +12,6 @@ import { connect } from "react-redux"
 import {
   addPlot,
   delPlot,
-  setMode,
   saveDataSet,
   setDataSet,
   deleteDataSet,
@@ -21,14 +20,17 @@ import {
   updateMetricBounds
 } from "./reducers/actions"
 
-const JCtrl = props => (
-  <div className='jp-ctrl'>
-    <Header {...props} />
-    <hr />
-    <Action {...props} />
-    <ActionSelector action={props.mode} setAction={props.setMode} />
-  </div>
-)
+function JCtrl(props) {
+  const [mode, setMode] = React.useState(USER_ACTIONS.ADD_PLOT)
+  return (
+    <div className='jp-ctrl'>
+      <Header {...props} />
+      <hr />
+      <Action {...props} mode={mode} />
+      <ActionSelector action={mode} setAction={setMode} />
+    </div>
+  )
+}
 
 function Header({ selectedPoint, selectPoint, data, validMetrics }) {
   return (
@@ -36,7 +38,7 @@ function Header({ selectedPoint, selectPoint, data, validMetrics }) {
       <label htmlFor='agent'>Agent</label>
       <select
         name='agent'
-        value={selectedPoint.id}
+        value={selectedPoint && selectedPoint.id}
         onChange={getAgentOnChange(data, selectPoint)}
       >
         {data.map(point => (
@@ -123,7 +125,6 @@ function Action({
 }
 
 const mapStateToProps = ({
-  mode,
   dataSet: {
     plots,
     validMetrics,
@@ -136,7 +137,6 @@ const mapStateToProps = ({
   loading,
   userConfig
 }) => ({
-  mode,
   plots,
   validMetrics,
   metricBounds,
@@ -154,9 +154,6 @@ const mapDispatchToProps = dispatch => ({
   },
   delPlot: metric => {
     dispatch(delPlot(metric))
-  },
-  setMode: mode => {
-    dispatch(setMode(mode))
   },
   saveDataSet: (name, data) => {
     dispatch(saveDataSet(name, data))

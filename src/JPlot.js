@@ -15,7 +15,7 @@ const plotHeight = [
   30, // dashboardTitle
   25, // plotTitle
   100, // plotFooter
-  96 // fudge factor
+  132 // fudge factor
 ].reduce((height, offset) => height - offset, window.innerHeight)
 
 const config = {
